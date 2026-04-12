@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bagian G - Panduan Penggunaan Media (Mobile App)</title>
+    
+    <style>
+        /* Styling Layout Visual di Browser (Kertas A4) */
+        body {
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .kertas-a4 {
+            background-color: white;
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 3cm 2.54cm; /* Margin standar tesis/skripsi */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-sizing: border-box;
+        }
+
+        /* Format Spesifik Konten Tesis (Times New Roman, 12pt) */
+        .konten-tesis {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 12pt; 
+            line-height: 1.5;
+            color: black;
+            text-align: justify;
+        }
+
+        .konten-tesis h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 12px;
+            margin-top: 0;
+        }
+
+        /* Format Numbering (1., 2., 3., ...) */
+        .konten-tesis ol {
+            padding-left: 24px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            list-style-type: decimal;
+        }
+
+        .konten-tesis ul {
+            padding-left: 20px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            list-style-type: disc;
+        }
+
+        .konten-tesis li {
+            margin-bottom: 8px;
+            text-align: justify;
+        }
+
+        .konten-tesis p {
+            margin-bottom: 10px;
+            margin-top: 0;
+            text-align: justify;
+        }
+
+        /* Tombol Overlay Convert */
+        .btn-convert {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.2s, background-color 0.2s;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-convert:hover {
+            transform: scale(1.05);
+            background-color: #d35400;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="kertas-a4" id="area-ekspor">
+        <div class="konten-tesis">
+            <h3>G. PANDUAN PENGGUNAAN MEDIA</h3>
+            <p>Panduan ini disusun untuk memberikan petunjuk praktis dan terperinci bagi pelatih maupun atlet dalam mengoperasikan aplikasi <em>mobile</em> "Latihan Petanque". Aplikasi ini dirancang secara khusus agar mudah digunakan langsung di lapangan melalui perangkat <em>smartphone</em>. Berikut adalah langkah-langkah penggunaannya:</p>
+            
+            <ol>
+                <li><strong>Persiapan dan Membuka Aplikasi</strong>
+                    <ul>
+                        <li>Pastikan perangkat <em>smartphone</em> Android dalam keadaan aktif dan memiliki daya baterai yang cukup untuk digunakan selama sesi latihan berlangsung.</li>
+                        <li>Buka aplikasi dengan cara menekan ikon "Latihan Petanque" yang sudah terpasang (terinstal) pada layar utama (<em>home screen</em>) perangkat Anda.</li>
+                        <li>Tunggu beberapa saat hingga layar utama aplikasi terbuka secara penuh. Aplikasi ini didesain dengan tampilan vertikal (<em>portrait</em>) agar pengguna merasa nyaman saat mengoperasikannya walau hanya dengan satu tangan di lapangan.</li>
+                    </ul>
+                </li>
+
+                <li><strong>Mengenal Navigasi Utama</strong>
+                    <ul>
+                        <li>Setelah aplikasi terbuka, pengguna akan disambut oleh halaman utama (<em>Home</em>) yang berisi spanduk informasi target sasaran atlet.</li>
+                        <li>Untuk menavigasi atau berpindah ke fitur lainnya, tekan ikon menu berupa tiga garis horizontal (menu <em>hamburger</em>) yang terletak di sudut kanan atas layar.</li>
+                        <li>Sebuah panel menu akan muncul ke bawah (<em>dropdown</em>), menampilkan pilihan menu yang terdiri dari: <em>Home</em>, Pengantar Olahraga Petanque, Model Latihan Keterampilan <em>Pointing</em>, Model Latihan Keterampilan <em>Shooting</em>, dan Catatan Latihan. Pengguna cukup menekan salah satu teks untuk masuk ke halaman tersebut, atau menekan area kosong untuk menutup menu.</li>
+                    </ul>
+                </li>
+
+                <li><strong>Membaca Materi Pengantar Olahraga</strong>
+                    <ul>
+                        <li>Pilih menu "Pengantar Olahraga Petanque" apabila pelatih atau atlet ingin mempelajari dan menyegarkan kembali ingatan mengenai teori dasar petanque.</li>
+                        <li>Pada halaman ini, tersedia beberapa topik bahasan, meliputi: Perkembangan Olahraga Petanque, Teknik Dasar, dan Peraturan Permainan.</li>
+                        <li>Sentuh salah satu kotak materi untuk membaca penjelasannya secara menyeluruh. Setelah selesai membaca, Anda dapat menekan tombol "Kembali ke Pengantar" yang posisinya berada di bagian atas layar untuk kembali ke daftar indeks materi.</li>
+                    </ul>
+                </li>
+
+                <li><strong>Mengakses Model Latihan <em>Pointing</em> dan <em>Shooting</em></strong>
+                    <ul>
+                        <li>Buka menu "Model Latihan Keterampilan <em>Pointing</em>" atau "Model Latihan Keterampilan <em>Shooting</em>" sesuai dengan program yang dijadwalkan pada sesi latihan hari itu.</li>
+                        <li>Sistem akan menampilkan berbagai macam teknik lemparan secara terstruktur, mulai dari tingkat yang paling mudah hingga tingkat kesulitan tinggi (misalnya: teknik <em>Rolling</em>, <em>Soft Lob</em>, <em>Ground Shoot</em>, hingga <em>Shot On The Iron</em>).</li>
+                        <li>Sentuh salah satu kartu teknik latihan yang diinginkan untuk membuka panduan pelaksanaannya. Di dalamnya memuat pedoman yang terperinci, mulai dari rincian tujuan latihan, target durasi dan repetisi yang harus dicapai, instruksi posisi badan secara bertahap, hingga indikator keberhasilan.</li>
+                        <li>Sangat disarankan agar atlet membaca dan memahami instruksi visual ini dengan saksama sebelum mulai memegang bola (<em>bosi</em>) dan mempraktikkannya.</li>
+                    </ul>
+                </li>
+
+                <li><strong>Menggunakan Fitur Evaluasi (Catatan Latihan)</strong>
+                    <ul>
+                        <li>Fitur ini merupakan instrumen utama pelatih untuk merekam jejak (<em>tracking</em>) performa atlet. Pilih menu "Catatan Latihan" di saat atlet mulai mempraktikkan repetisi lemparan di lapangan.</li>
+                        <li>Tekan tombol persegi panjang berwarna biru yang bertuliskan "Mulai Latihan Baru" untuk memunculkan lembar penilaian digital.</li>
+                        <li>Tentukan jenis latihan yang sedang diuji dengan memilih kategori (<em>Pointing</em>/<em>Shooting</em>) dan level teknik melalui kolom pilihan (<em>dropdown</em>) yang tersedia di layar.</li>
+                        <li>Di bagian bawah lembar tersebut, terdapat kisi-kisi (<em>grid</em>) berisi 100 buah lingkaran angka yang mewakili 100 kali kesempatan lemparan. Pengisian rekaman data dirancang agar sangat natural dan cepat:
+                            <ul>
+                                <li>Tekan lingkaran angka satu kali (lingkaran akan berubah warna menjadi biru dengan tanda centang "V") untuk mencatat bahwa lemparan atlet tersebut <strong>Berhasil</strong>.</li>
+                                <li>Tekan lingkaran yang sama sekali lagi (lingkaran akan berubah warna menjadi merah dengan tanda silang "X") untuk mencatat bahwa lemparan atlet tersebut <strong>Gagal</strong>.</li>
+                                <li>Apabila terjadi kesalahan saat menekan (salah pencatatan), cukup tekan lingkaran tersebut untuk ketiga kalinya agar statusnya kembali netral atau belum terisi (berwarna abu-abu).</li>
+                            </ul>
+                        </li>
+                        <li>Setelah sesi pengulangan selesai dilakukan, tekan tombol hijau dengan tulisan "Simpan Hasil Latihan". Data keberhasilan atlet akan secara otomatis tersimpan dan dijumlahkan ke dalam daftar "Riwayat Terakhir" untuk dievaluasi di kemudian hari.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <button class="btn-convert" onclick="exportToWord('Bagian_G_Panduan_Penggunaan_Media_Mobile.doc')">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+        </svg>
+        Convert to Word
+    </button>
+
+    <script>
+        function exportToWord(filename = 'document.doc') {
+            // Ambil elemen konten
+            var content = document.getElementById('area-ekspor').innerHTML;
+            
+            // Definisikan CSS untuk injeksi ke dalam Word
+            var styles = `
+                <style>
+                    body { font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.5; text-align: justify; }
+                    h3 { font-size: 12pt; font-weight: bold; margin-bottom: 12px; }
+                    ol { padding-left: 24px; list-style-type: decimal; }
+                    ul { padding-left: 24px; list-style-type: disc; }
+                    li { margin-bottom: 8px; text-align: justify; }
+                    p { margin-bottom: 10px; margin-top: 0; text-align: justify; }
+                </style>
+            `;
+            
+            // Susun struktur dokumen Word (MIME type XML/HTML representation)
+            var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title>" + styles + "</head><body>";
+            var postHtml = "</body></html>";
+            
+            // Gabungkan menjadi satu string HTML utuh
+            var html = preHtml + content + postHtml;
+
+            // Buat Blob data
+            var blob = new Blob(['\ufeff', html], {
+                type: 'application/msword'
+            });
+
+            // Buat elemen link tersembunyi untuk memicu unduhan
+            var downloadLink = document.createElement("a");
+            document.body.appendChild(downloadLink);
+
+            if (navigator.msSaveOrOpenBlob) {
+                // Untuk IE
+                navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                // Untuk browser modern (Chrome, Firefox, Safari, Edge)
+                downloadLink.href = URL.createObjectURL(blob);
+                downloadLink.download = filename;
+                downloadLink.click();
+            }
+
+            // Bersihkan elemen
+            document.body.removeChild(downloadLink);
+        }
+    </script>
+</body>
+</html>
