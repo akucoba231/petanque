@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETANQUE MASTERY</title>
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div id="app-container">
+        <nav>
+            <div class="logo-container">
+                <img class="logo" src="./assets/logo.png" alt="logo-app" />
+                <div class="logo-text">PETANQUE MASTERY
+                    <sub>by Ridzwan Septian Fridany, S. Pd</sub>
+                </div>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+        </nav>
+
+        <ul id="menu-list">
+            <li id="start" onclick="loadContent('home', this)" data-id="home">🏠 Home</li>
+            <li onclick="loadContent('pengantar', this)" data-id="pengantar">📚 Pengantar Olahraga Petanque</li>
+            <!-- <li onclick="loadContent('model-latihan-pointing', this)" data-id="model-latihan-pointing">🎯 Model Latihan
+            Keterampilan Pointing</li>
+            <li onclick="loadContent('model-latihan-shooting', this)" data-id="model-latihan-shooting">🔥 Model Latihan
+            Keterampilan Shooting</li> -->
+            <li onclick="loadContent('model-latihan', this)" data-id="model-latihan">🎯 Model Latihan Keterampilan</li>
+            <li onclick="loadContent('evaluasi-refleksi', this)" data-id="evaluasi-refleksi">💬 Catatan Latihan dan Profil Atlet</li>
+            <li onclick="loadContent('statistik-mendalam', this)" data-id="statistik-mendalam">📊 Grafik Pencapaian Atlet</li>
+        </ul>
+
+
+        <div id="utama">
+
+        </div>
+
+        <!-- <div id="home" class="content">
+            <div class="hero-banner">
+                <h2>Latihan Teknik Pointing & Shooting</h2>
+                <p>untuk Atlet Usia 16-20 Tahun</p>
+            </div>
+
+
+            <img src="./assets/background_home.png" alt="Atlet Petanque" class="athlete-img">
+        </div> -->
+
+        <div id="home" class="content">
+    <div class="page-padding">
+        <div class="home-profile-header">
+            <div class="greeting">
+                <h2 id="home-greeting">Halo, Atlet!</h2>
+                <p id="home-date">Sabtu, 9 Mei 2026</p>
+            </div>
+            <img id="home-foto-profil" src="./assets/profile.png" class="home-avatar" onclick="loadContent('evaluasi-refleksi')">
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-label">Rata-rata Akurasi</span>
+                <div class="stat-value"><span id="home-pencapaian">0</span>%</div>
+                <div class="stat-bar-container">
+                    <div id="home-progress-bar" class="stat-bar-fill" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Total Sesi</span>
+                <div class="stat-value"><span id="home-total-sesi">0</span></div>
+                <p style="font-size: 0.7rem; color: #888; margin: 0;">Latihan Selesai</p>
+            </div>
+        </div>
+
+        <div class="home-chart-section">
+            <h3 class="section-title">Tren Performa (7 Sesi Terakhir)</h3>
+            <div class="chart-container" style="position: relative; height:200px; width:100%; background: #fff; padding: 10px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); box-sizing: border-box; display: block;">
+                <canvas id="performaChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <div id="pengantar" class="content">
+            <div class="page-padding">
+                <div class="materi-header">
+                    <img src="./assets/materi-pengantar.webp" alt="Latihan Petanque">
+                    <p class="bold">Daftar Materi Pengantar</p>
+                </div>
+
+                <div class="materi-list">
+                    <div class="materi-item" onclick="openMateri('perkembangan')">
+                        <div class="materi-icon">🏅</div>
+                        <div>Perkembangan Olahraga Petanque</div>
+                    </div>
+
+                    <div class="materi-item" onclick="openMateri('teknik-dasar')">
+                        <div class="materi-icon">🎯</div>
+                        <div>Teknik Dasar Petanque</div>
+                    </div>
+
+                    <div class="materi-item" onclick="openMateri('peraturan')">
+                        <div class="materi-icon">⚖️</div>
+                        <div>Peraturan Permainan</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Model latihan pointing -->
+        <!-- <div id="model-latihan-pointing" class="content">
+            <div class="page-padding">
+                <div class="section-title">🔵 Model Latihan Pointing</div>
+                <p class="section-desc">Pilih teknik untuk melihat panduan detail.</p>
+
+                <div class="latihan-list">
+                    <div class="card-latihan" onclick="openDetailPointing('rolling')">
+                        <div class="card-icon">🌀</div>
+                        <div class="card-info">
+                            <h3>Teknik Rolling</h3>
+                            <span>Fokus: Kontrol Gelinding</span>
+                        </div>
+                        <div class="card-arrow">›</div>
+                    </div>
+
+                    <div class="card-latihan" onclick="openDetailPointing('soft-lob')">
+                        <div class="card-icon">🎾</div>
+                        <div class="card-info">
+                            <h3>Teknik Soft Lob</h3>
+                            <span>Fokus: Akurasi Donnee</span>
+                        </div>
+                        <div class="card-arrow">›</div>
+                    </div>
+
+                    <div class="card-latihan" onclick="openDetailPointing('full-lob')">
+                        <div class="card-icon">🚀</div>
+                        <div class="card-info">
+                            <h3>Teknik Full Lob</h3>
+                            <span>Fokus: Parabola Tinggi</span>
+                        </div>
+                        <div class="card-arrow">›</div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Model latihan shooting -->
+        <!-- <div id="model-latihan-shooting" class="content">
+            <div class="page-padding">
+                <div class="section-title" style="color:#d35400">🔥 Model Latihan Shooting</div>
+                <p class="section-desc">Fokus pada akurasi dan kekuatan lemparan.</p>
+
+                <div class="latihan-list">
+                    <div class="card-latihan" onclick="openDetailShooting('shooting-1')">
+                        <div class="card-icon">💥</div>
+                        <div class="card-info">
+                            <h3>Shooting Level 1</h3>
+                            <span>Teknik Ground Shoot</span>
+                        </div>
+                        <div class="card-arrow">›</div>
+                    </div>
+
+                    <div class="card-latihan" onclick="openDetailShooting('shooting-2')">
+                        <div class="card-icon">🔥</div>
+                        <div class="card-info">
+                            <h3>Shooting Level 2</h3>
+                            <span>Teknik Short Shot</span>
+                        </div>
+                        <div class="card-arrow">›</div>
+                    </div>
+
+                    <div class="card-latihan" onclick="openDetailShooting('shooting-3')">
+                        <div class="card-icon">🎯</div>
+                        <div class="card-info">
+                            <h3>Shooting Level 3</h3>
+                            <span>Teknik Shot On The Iron</span>
+                        </div>
+                        <div class="card-arrow">›</div>
+                    </div>
+                </div>
+                <div style="height:50px"></div>
+            </div>
+        </div> -->
+
+        <!-- Model Latihan Keterampilan (Join) -->
+        <div id="model-latihan" class="content">
+            <div class="page-padding">
+                <div class="section-title">🎯 Model Latihan Keterampilan</div>
+                <p class="section-desc">Pilih model latihan di bawah ini untuk melihat detail perlengkapan, layout, dan langkah pelaksanaannya.</p>
+
+                <div id="daftar-semua-latihan" class="latihan-list">
+                </div>
+                
+                <div style="height:50px"></div>
+            </div>
+        </div>
+
+        <!-- Ini adalah template view untuk detail pengantar -->
+        <div id="materi-view" class="content">
+            <div class="sticky-header">
+                <button class="btn-back" id="kembali-pengantar">
+                    ⬅ Kembali ke Pengantar
+                </button>
+            </div>
+            <div class="page-padding">
+                <h2 id="m-judul" class="detail-title" style="font-size: 1.3rem;">Judul Materi</h2>
+                <div class="detail-card" style="line-height: 1.6; color: #444; font-size: 0.95rem;">
+                    <div id="m-konten">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ini adalah template view untuk detail latihan -->
+       <!--  <div id="detail-view" class="content">
+
+            <div class="sticky-header">
+                <button class="btn-back" id="kembali">
+                    ⬅ Kembali ke Menu
+                </button>
+            </div>
+
+            <div class="page-padding">
+                <h1 id="d-judul" class="detail-title">Judul Latihan</h1>
+
+                <div class="detail-card">
+                    <h4 class="detail-label">🚩 Tujuan Latihan</h4>
+                    <p id="d-tujuan">...</p>
+                </div>
+
+                <div class="detail-card">
+                    <h4 class="detail-label">⏱ Durasi & Repetisi</h4>
+                    <p id="d-durasi" class="highlight-text">...</p>
+                </div>
+
+                <div class="detail-card">
+                    <h4 class="detail-label">👣 Langkah Pelaksanaan</h4>
+                    <ul id="d-langkah" class="step-list">
+                    </ul>
+                </div>
+
+                <div class="detail-card success-card">
+                    <h4 class="detail-label">✅ Indikator Keberhasilan</h4>
+                    <p id="d-indikator">...</p>
+                </div>
+            </div>
+        </div> -->
+        <div id="detail-view" class="content">
+            <div class="sticky-header">
+                <button class="btn-back" id="kembali">⬅ Kembali</button>
+            </div>
+
+            <div class="page-padding">
+                <h1 id="d-judul" class="detail-title">Judul Latihan</h1>
+
+                <div class="detail-card media-card">
+                    <h4 class="detail-label">🖼 Gambar Ilustrasi</h4>
+                    <div id="d-container-gambar" class="placeholder-media">Gambar Ilustrasi</div>
+                </div>
+
+                <div class="detail-card media-card">
+                    <h4 class="detail-label">🎥 Video Tutorial</h4>
+                    <div id="d-container-video" class="placeholder-media">Video Tutorial</div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🚩 Tujuan Latihan</span>
+                        <span class="icon">▲</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p id="d-tujuan">...</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>📐 Perlengkapan & Layout</span>
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="accordion-content" id="d-layout-wrapper">
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>👣 Langkah Pelaksanaan</span>
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <ul id="d-langkah" class="step-list"></ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; text-align: center; padding-bottom: 50px;">
+                    <p id="d-indikator" style="display:none;"></p> <button class="btn-primary-action bg-blue" style="width:100%;justify-content: center;" onclick="bukaModalLatihan()">
+                        🚀 Ayo Lakukan Latihan
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Evaluasi dan Refleksi : Catatan Latihan -->
+        <div id="evaluasi-refleksi" class="content">
+            <div class="page-padding">
+                <div class="eval-card">
+                    <div class="profile-box">
+                        <img src="./assets/profile.png" class="profile-photo" alt="Foto Atlet">
+                        <div>
+                            <div class="profile-name" id="nama-atlet">John Doe</div>
+                            <div class="profile-role">Atlet Petanque</div>
+                            <div class="profile-role">Rata-rata Akurasi <span style="font-weight: bold; color: black;" id="pencapaian-atlet">0</span> <span id="review" style="
+                            font-size:0.65rem; padding:2px 6px; border-radius:4px; color:white;"></span></div>
+                        </div>
+
+                        <button onclick="bukaFormProfil('Halo, ' + dataAtlet.nama_atlet,'Anda dapat mengubah data profil Anda di halaman ini')" style="
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        background: #f0f2f5;
+                        
+                        border-radius: 12px;
+                        width: clamp(30px,40px,50px);
+                        aspect-ratio: 1/1;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        font-size: 1rem;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                        transform: translate(50%,-50%);
+                        box-sizing: border-box;
+                        border: 5px solid #2980b9;
+                        ">
+                        ⚙️
+                    </button>
+                </div>
+            </div>
+
+            <div class="eval-card">
+                <button onclick="bukaFormLatihan()" class="btn-menu bg-blue" style="width:100%; border-radius:8px;">
+                    <span>➕ Mulai Latihan Baru</span>
+                    <span class="arrow">›</span>
+                </button>
+            </div>
+
+            <div class="eval-card">
+                <div class="progress-title">Ringkasan Riwayat</div>
+                <div class="progress-item">
+                    <div>Total Sesi</div>
+                    <div class="progress-value"><span id="total-sesi">0</span> Sesi</div>
+                </div>
+                <div class="progress-item">
+                    <div>Total Poin Berhasil</div>
+                    <div class="progress-value" style="color:#27ae60"><span id="total-poin">0</span> Poin</div>
+                </div>
+            </div>
+
+            <div id="daftar-riwayat">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-latihan" class="content">
+        <div class="sticky-header">
+            <button class="btn-back" onclick="loadContent('evaluasi-refleksi')">⬅ Batal</button>
+        </div>
+        <div class="page-padding">
+            <h3 class="section-title">Form Latihan Baru</h3>
+
+            <div class="detail-card">
+                <label class="detail-label">Pilih Kategori</label>
+                <select id="select-kategori" class="input-style" onchange="updateTugas()">
+                    <option value="pointing">Pointing</option>
+                    <option value="shooting">Shooting</option>
+                </select>
+
+                <br><br>
+
+                <label class="detail-label">Pilih Level/Teknik</label>
+                <select id="select-level" class="input-style" onchange="updateTugas()">
+                </select>
+            </div>
+
+            <div class="detail-card success-card">
+                <h4 class="detail-label">Tugas Latihan:</h4>
+                <p id="tugas-deskripsi" style="font-size: 0.9rem; font-weight: bold;">--</p>
+            </div>
+
+            <div class="detail-card">
+                <h4 class="detail-label">Checklist 100 Lemparan</h4>
+                <p style="font-size: 0.75rem; color: #666;">Klik lingkaran: Biru (Berhasil), Abu (Gagal), Putih
+                (Belum)</p>
+                <div id="grid-checklist"
+                style="display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; margin-top: 10px;">
+            </div>
+        </div>
+
+        <button onclick="simpanLatihan()" class="btn-menu bg-blue" style="width:100%; margin-top: 20px;">
+            💾 Simpan Hasil Latihan
+        </button>
+    </div>
+</div>
+
+<div id="modal-profil" class="content">
+    <div class="page-padding">
+        <div class="form-header-card">
+            <h3 id="welcome">Selamat Datang!</h3>
+            <p id="text-welcome">Lengkapi profil atlet untuk memulai sesi latihan hari ini.</p>
+        </div>
+
+        <div class="detail-card" style="text-align: center;">
+            <label class="detail-label">Foto Profil</label>
+            <div style="position: relative; display: inline-block; margin-bottom: 15px;">
+                <img id="preview-foto" src="./assets/profile.png" 
+                style="width: 300px; height: 300px; border-radius: 10px; object-fit: cover; border: 3px solid #1e3a5f; background: #eee;">
+
+                <input type="file" id="input-foto" accept="image/*" style="display: none;" onchange="previewImage(this)">
+
+                <button onclick="document.getElementById('input-foto').click()" 
+                style="position: absolute; bottom: 0; right: 0; background: #1e3a5f; color: white; border: none; border-radius: 5px; width: auto; padding: 5px 10px; cursor: pointer;">
+                📷 Unggah Foto
+            </button>
+        </div>
+    </div>
+
+    <div class="detail-card">
+        <label class="detail-label">Nama Lengkap</label>
+        <input type="text" id="reg-nama" class="input-style" placeholder="Masukkan nama Anda">
+
+        <div style="margin-top: 20px;">
+            <label class="detail-label">Umur (Tahun)</label>
+            <input type="number" id="reg-umur" class="input-style" placeholder="Contoh: 18">
+        </div>
+
+        <div style="margin-top: 20px;">
+            <label class="detail-label">Alamat / Asal Klub</label>
+            <textarea id="reg-alamat" class="input-style" rows="3" placeholder="Masukkan alamat atau klub"></textarea>
+        </div>
+    </div>
+
+    <button onclick="simpanProfilBaru()" class="btn-menu bg-blue" style="width:100%; margin-top: 10px; justify-content: center;">
+        💾 Simpan & Mulai Latihan
+    </button>
+</div>
+</div>
+
+<!-- <div id="form-latihan-baru" class="content">
+    <div class="sticky-header">
+        <button class="btn-back" id="kembali-form">⬅ Kembali</button>
+    </div>
+
+    <div class="page-padding">
+        <div class="form-header-card">
+            <h3>📝 Catatan Latihan Baru</h3>
+            <p>Selesaikan 100 lemparan dan catat hasilnya.</p>
+        </div>
+
+        <div class="detail-card">
+            <label class="detail-label">Pilih Model Latihan</label>
+            <select id="select-model-latihan" class="input-style">
+                </select>
+        </div>
+
+        <div id="checklist-container">
+            </div>
+
+        <div class="detail-card" style="margin-top: 20px;">
+            <label class="detail-label">Catatan Atlet</label>
+            <textarea id="input-catatan-atlet" class="input-style" rows="4" placeholder="Masukan catatan Anda (Opsional)"></textarea>
+        </div>
+
+        <button onclick="prosesSimpanRiwayat()" class="btn-menu bg-green" style="width:100%; margin-top: 20px; justify-content: center;">
+            💾 Simpan Sesi Latihan
+        </button>
+    </div>
+</div> -->
+
+<div id="form-latihan-baru" class="content">
+    <div class="sticky-header">
+        <button class="btn-back" id="kembali-form">⬅ Kembali</button>
+    </div>
+
+    <div class="page-padding">
+        <div class="form-header-card">
+            <h3>📝 Catatan Latihan Baru</h3>
+            <p>Lakukan 100 kali percobaan sesuai model latihan.</p>
+        </div>
+
+        <div class="detail-card">
+            <label class="detail-label">Pilih Model Latihan</label>
+            <select id="select-model-latihan" class="input-style" onchange="updateInfoModel(this.value)">
+            </select>
+            
+            <div id="info-model-terpilih" class="info-model-box" style="display: none;">
+                <div id="display-nama-latihan" class="nama-latihan-badge"></div>
+                <div id="display-tujuan-latihan" class="tujuan-latihan-text"></div>
+            </div>
+        </div>
+
+        <div class="legend-container">
+            <div class="legend-item"><span class="dot-legend status-0"></span> Belum/Gagal</div>
+            <div class="legend-item"><span class="dot-legend status-1"></span> Berhasil</div>
+            <div class="legend-item"><span class="dot-legend status-2"></span> Gagal</div>
+        </div>
+
+        <div id="checklist-container">
+        </div>
+
+        <div class="detail-card" style="margin-top: 20px;">
+            <label class="detail-label">Catatan Atlet</label>
+            <textarea id="input-catatan-atlet" class="input-style" rows="4" placeholder="Masukan catatan Anda (Opsional)"></textarea>
+        </div>
+
+        <button onclick="prosesSimpanRiwayat()" class="btn-menu bg-green" style="width:100%; margin-top: 20px; justify-content: center;">
+            💾 Simpan Sesi Latihan
+        </button>
+    </div>
+</div>
+
+<div id="statistik-mendalam" class="content" style="display:none;">
+    <div class="page-padding">
+        <div class="form-header-card">
+            <h3>📊 Analisis Performa Atlet</h3>
+            <p>Tinjauan menyeluruh seluruh sesi latihan Anda.</p>
+        </div>
+
+        <div class="stats-grid" style="grid-template-columns: 1fr 1fr; margin-bottom:15px;">
+            <div class="stat-card">
+                <span class="stat-label">Sesi Tertinggi</span>
+                <div class="stat-value" id="val-tertinggi">0%</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Sesi Terendah</span>
+                <div class="stat-value" id="val-terendah" style="color: #c0392b;">0%</div>
+            </div>
+        </div>
+
+        <div class="detail-card" style="padding: 10px;">
+            <h4 class="detail-label" style="margin-bottom:10px;">📈 Grafik Perkembangan Jangka Panjang</h4>
+            <div class="chart-scroll-wrapper" style="width: 100%; overflow-x: auto; background: #fff; padding-bottom: 10px;">
+                <div id="chart-area-raksasa" style="height: 300px; min-width: 100%;">
+                    <canvas id="canvasRaksasa"></canvas>
+                </div>
+            </div>
+            <p style="font-size: 0.7rem; color: #888; text-align: center; margin-top: 10px;">
+                ↔️ Geser untuk melihat data dari awal latihan
+            </p>
+        </div>
+
+        <div class="detail-card" style="margin-top:15px; background: #fdfdfd;">
+            <h4 class="detail-label">💡 Interpretasi Data</h4>
+            <p style="font-size: 0.85rem; color: #666; line-height: 1.5;">
+                Grafik di atas menampilkan seluruh data lemparan Anda. Titik puncak menunjukkan konsentrasi maksimal, sedangkan penurunan biasanya terjadi pada model latihan dengan tingkat kesulitan baru atau faktor kelelahan.
+            </p>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script type="text/javascript" src="dataModelLatihan.js"></script>
+<script type="text/javascript" src="scripts.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Petanque - App</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* Dasar & Layout */
+        :root {
+            --max-width: 480px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            user-select: none;
+            overflow: hidden; /* Mengunci scroll browser bawaan */
+        }
+
+        #app-container {
+            width: 100%;
+            max-width: var(--max-width);
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Navbar sesuai warna biru tua di desain */
+        nav {
+            box-sizing: border-box;
+            background-color: #1e3a5f;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 64px;
+            padding: 30px 20px 20px 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-text {
+            font-weight: bold;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            line-height: 1.1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .logo-text sub {
+            font-size: 0.5em;
+        }
+
+        .menu-toggle {
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Menu Dropdown */
+        #menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background: #2c3e50;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.4s ease-out;
+            position: absolute; /* Diubah agar presisi di dalam container */
+            top: 64px; /* Turun sejauh tinggi navbar */
+            width: 100%;
+            max-width: var(--max-width);
+            z-index: 999;
+        }
+
+        #menu-list.active {
+            max-height: 400px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #menu-list li {
+            padding: 15px 20px;
+            border-bottom: 1px solid #3e4f5f;
+            cursor: pointer;
+            color: white;
+            transition: 0.3s;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .menu-active {
+            background-color: #34495e !important;
+            border-left: 5px solid #ff8c00;
+        }
+
+        /* Header / Banner Home */
+        .hero-banner {
+            background: rgba(240, 240, 240, .7);
+            text-align: center;
+            padding: 20px;
+            position: absolute;
+            width: 100%;
+            bottom: 3%;
+            left: 50%;
+            white-space: nowrap;
+            overflow: hidden;
+            transform-origin: left;
+            transform: translate(-50%, 0);
+            animation: swipe 2s 1;
+        }
+
+        @keyframes swipe {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        .hero-banner h2 {
+            color: #1e3a5f;
+            margin: 10px 0 5px;
+            font-size: 1.2rem;
+        }
+
+        .hero-banner p {
+            color: #111;
+            font-size: 0.9rem;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        /* Tombol Menu ala Dashboard */
+        .btn-menu {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 25px;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            border: none;
+        }
+
+        .btn-menu:active {
+            transform: scale(0.98);
+        }
+
+        .bg-orange { background: linear-gradient(to right, #e67e22, #d35400); }
+        .bg-blue { background: linear-gradient(to right, #2980b9, #2c3e50); }
+        .bg-green { background: linear-gradient(to right, #27ae60, #1e5e3a); }
+        .arrow { font-size: 1.2rem; }
+
+        /* Pengaturan Halaman Mandiri (Modifikasi Baru) */
+        .content {
+            display: none;
+            height: calc(100vh - 64px);
+            overflow-y: auto; /* Memungkinkan scroll khusus di dalam konten */
+            overflow-x: hidden;
+            background: white;
+        }
+
+        .page-padding {
+            padding: 20px;
+            padding-bottom: 60px; /* Jarak aman di bagian bawah halaman */
+        }
+
+        .logo {
+            width: 50px;
+            aspect-ratio: 1 / 1;
+        }
+
+        /* Bagian Evaluasi dan Refleksi */
+        .eval-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 14px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .12);
+        }
+
+        .profile-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-photo {
+            width: 56px;
+            height: 56px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: #ddd;
+        }
+
+        .profile-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #1e3a5f;
+        }
+
+        .profile-role {
+            font-size: .9rem;
+            color: #666;
+        }
+
+        .progress-title {
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 6px;
+        }
+
+        .progress-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: .95rem;
+        }
+
+        .progress-item:last-child {
+            border-bottom: none;
+        }
+
+        .progress-value {
+            font-weight: 700;
+        }
+
+        .materi-header {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+            text-align: center;
+        }
+
+        .materi-header img {
+            width: 100%;
+            display: block;
+        }
+
+        .materi-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .materi-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: linear-gradient(to right, #2f5fa7, #1e3a5f);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
+            transition: transform .15s ease;
+        }
+
+        .materi-item:active {
+            transform: scale(.97);
+        }
+
+        .materi-icon {
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        /* Bagian model latihan */
+        .section-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #1e3a5f;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+            margin-top: 0;
+        }
+
+        .card-latihan {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 5px solid transparent;
+        }
+
+        .card-latihan:active {
+            transform: scale(0.98);
+        }
+
+        .card-latihan:nth-child(odd) {
+            border-left-color: #1e3a5f;
+        }
+
+        .card-latihan:nth-child(even) {
+            border-left-color: #d35400;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            background: #f0f2f5;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #1e3a5f;
+        }
+
+        .card-info { flex: 1; }
+        .card-info h3 { margin: 0; font-size: 1rem; color: #333; }
+        .card-info span { font-size: 0.8rem; color: #888; }
+        .card-arrow { font-weight: bold; color: #ccc; }
+
+        /* Styling Halaman Detail */
+        .sticky-header {
+            background: #fff;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-back {
+            background: none;
+            border: none;
+            color: #1e3a5f;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .detail-title {
+            color: #1e3a5f;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .detail-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .detail-label {
+            margin: 0 0 10px 0;
+            color: #555;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .step-list {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .step-list li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            color: #444;
+        }
+
+        .success-card {
+            background: #e8f5e9;
+            border: 1px solid #c8e6c9;
+        }
+
+        .success-card .detail-label {
+            color: #2e7d32;
+            border-color: #a5d6a7;
+        }
+
+        .praktik-item {
+            background: #f8f9fa;
+            border-left: 4px solid #2980b9;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+        }
+
+        .praktik-item strong {
+            color: #1e3a5f;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .input-style {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            background: #fff;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app-container">
+        <nav>
+            <div class="logo-container">
+                <img class="logo" src="./assets/logo.png" alt="logo-app" onerror="this.style.display='none'" />
+                <div class="logo-text">LATIHAN PETANQUE
+                    <sub>oleh Ridzwan Septian Fridany, S. Pd</sub>
+                </div>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+        </nav>
+
+        <ul id="menu-list">
+            <li id="start" onclick="loadContent('home', this)" data-id="home">🏠 Home</li>
+            <li onclick="loadContent('pengantar', this)" data-id="pengantar">📚 Pengantar Olahraga Petanque</li>
+            <li onclick="loadContent('model-latihan-keterampilan', this)" data-id="model-latihan-keterampilan">
+                <span class="material-icons" style="font-size: 1.1rem; vertical-align: bottom;">api</span> Model Latihan Keterampilan
+            </li>
+            <li onclick="loadContent('evaluasi-refleksi', this)" data-id="evaluasi-refleksi">💬 Catatan Latihan</li>
+        </ul>
+
+        <div id="home" class="content">
+            <div class="hero-banner">
+                <h2>Latihan Teknik Pointing & Shooting</h2>
+                <p>untuk Atlet Usia 16-20 Tahun</p>
+            </div>
+            <img src="./assets/background_home.png" alt="Atlet Petanque" class="athlete-img" style="width:100%; height:auto;" onerror="this.style.display='none'">
+        </div>
+
+        <div id="pengantar" class="content">
+            <div class="page-padding">
+                <div class="materi-header">
+                    <img src="./assets/materi-teknik.png" alt="Latihan Petanque" onerror="this.style.display='none'">
+                    <p class="bold">Daftar Materi Pengantar</p>
+                </div>
+
+                <div class="materi-list">
+                    <div class="materi-item" onclick="openMateri('perkembangan')">
+                        <div class="materi-icon">🏅</div>
+                        <div>Perkembangan Olahraga Petanque</div>
+                    </div>
+                    <div class="materi-item" onclick="openMateri('teknik-dasar')">
+                        <div class="materi-icon">🎯</div>
+                        <div>Teknik Dasar Petanque</div>
+                    </div>
+                    <div class="materi-item" onclick="openMateri('peraturan')">
+                        <div class="materi-icon">⚖️</div>
+                        <div>Peraturan Permainan</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="model-latihan-keterampilan" class="content">
+            <div class="page-padding">
+                <div class="section-title"><span class="material-icons" style="vertical-align: bottom;">api</span> Model Latihan Keterampilan</div>
+                <p class="section-desc">Pilih model latihan untuk melihat panduan detail dan video.</p>
+                
+                <div class="latihan-list" id="list-model-container">
+                    </div>
+                <div style="height:50px"></div>
+            </div>
+        </div>
+
+        <div id="detail-latihan-view" class="content">
+            <div class="sticky-header">
+                <button class="btn-back" onclick="loadContent('model-latihan-keterampilan')">
+                    ⬅ Kembali ke Menu Latihan
+                </button>
+            </div>
+            
+            <div id="media-area" style="width: 100%; background: #000;">
+                </div>
+
+            <div class="page-padding">
+                <h1 id="dl-judul" class="detail-title">Judul Latihan</h1>
+
+                <div class="detail-card">
+                    <h4 class="detail-label">🚩 Tujuan Utama</h4>
+                    <p id="dl-tujuan">...</p>
+                </div>
+
+                <div class="detail-card">
+                    <h4 class="detail-label">🎒 Perlengkapan & Layout</h4>
+                    <ul id="dl-perlengkapan" class="step-list" style="margin-bottom: 10px;"></ul>
+                    <hr style="border: 0; border-top: 1px dashed #ddd;">
+                    <ul id="dl-layout" class="step-list" style="margin-top: 10px;"></ul>
+                </div>
+
+                <div class="detail-card">
+                    <h4 class="detail-label">👣 Langkah Pelaksanaan</h4>
+                    <div id="dl-langkah">
+                        </div>
+                </div>
+
+                <button id="btn-mulai-latihan" class="btn-menu bg-green" style="width: 100%; justify-content: center; margin-top: 20px;">
+                    Ayo Lakukan Latihan
+                </button>
+            </div>
+        </div>
+
+        <div id="evaluasi-refleksi" class="content">
+            <div class="page-padding">
+                <div class="eval-card">
+                    <div class="profile-box">
+                        <img src="./assets/profile.png" class="profile-photo" alt="Foto Atlet" onerror="this.style.display='none'">
+                        <div>
+                            <div class="profile-name" id="nama-atlet">Atlet-1</div>
+                            <div class="profile-role">User Petanque</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="eval-card">
+                    <div class="progress-title">Ringkasan Riwayat</div>
+                    <div class="progress-item">
+                        <div>Total Sesi Selesai</div>
+                        <div class="progress-value"><span id="total-sesi">0</span> Sesi</div>
+                    </div>
+                    <div class="progress-item">
+                        <div>Total Lemparan Berhasil</div>
+                        <div class="progress-value" style="color:#27ae60"><span id="total-poin">0</span> Lemparan</div>
+                    </div>
+                </div>
+
+                <div id="daftar-riwayat">
+                    </div>
+            </div>
+        </div>
+
+        <div id="modal-form-baru" class="content">
+            <div class="sticky-header">
+                <button class="btn-back" onclick="loadContent('detail-latihan-view')">⬅ Batal</button>
+            </div>
+            <div class="page-padding">
+                <h3 class="section-title">Form Latihan Baru</h3>
+                
+                <div class="detail-card success-card">
+                    <h4 class="detail-label">Model Latihan Saat Ini:</h4>
+                    <p id="form-nama-model" style="font-size: 1rem; font-weight: bold; color: #1e3a5f;">--</p>
+                </div>
+
+                <div class="detail-card">
+                    <h4 class="detail-label">Checklist 100 Lemparan</h4>
+                    <p style="font-size: 0.75rem; color: #666;">Ketuk lingkaran untuk menandai lemparan yang berhasil (Biru = Berhasil, Putih = Gagal/Belum).</p>
+                    <div id="grid-checklist-baru" style="display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; margin-top: 15px;">
+                        </div>
+                </div>
+                
+                <div class="detail-card">
+                    <h4 class="detail-label">Keterangan Tambahan</h4>
+                    <textarea id="input-keterangan" class="input-style" rows="3" placeholder="Kondisi lapangan, cuaca, atau evaluasi mandiri (opsional)..."></textarea>
+                </div>
+
+                <button onclick="simpanLatihanBaru()" class="btn-menu bg-blue" style="width:100%; justify-content:center; margin-top: 20px;">
+                    💾 Simpan Hasil Latihan
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ============================================
+        // DATA UTAMA: Rangkaian Model Latihan (DOCX)
+        // ============================================
+        const dataLatihan = [
+            {
+                id: 1,
+                model: "MODEL LATIHAN I",
+                nama: "DRILL POINT-SHOOT TRANSITION",
+                tujuan_utama: "Melatih Transisi antara teknik pointing dan shooting",
+                perlengkapan: ["Lingkaran / Circle 50 Cm = 2 buah", "Bosi = 1 set (3 buah)", "Boka = 1"],
+                layout_latihan: ["Simpan Circle 1 di posisi atlet melempar.", "Simpan Boka di jarak 6 meter.", "Simpan circle 2 di posisi boka"],
+                langkah_langkah: [
+                    { deskripsi: "Atlet menyiapkan 3 bosi.", tujuan: "", coaching_point: "", target: "" },
+                    { deskripsi: "Atlet melakukan lemparan ke-1 menggunakan teknik pointing.", tujuan: "Meningkatkan akurasi lemparan pointing.", coaching_point: "Lemparan pointing dengan posisi jongkok fokus untuk mendekatkan bosi ke boka dengan titik jatuhan bosi (dropma) disesuaikan 1-2 meter sebelum boka.", target: "Bosi harus masuk ke dalam Lingkaran / circle." },
+                    { deskripsi: "Atlet melakukan lemparan ke-2 menggunakan teknik Shooting.", tujuan: "Meningkatkan akurasi lemparan shooting.", coaching_point: "Menembak Bosi sasaran agar keluar lingkaran.", target: "Hasil lemparan harus mengenai bosi sasaran yang ada di lingkaran." },
+                    { deskripsi: "Atlet melakukan lemparan ke-3 menggunakan teknik pointing.", tujuan: "Meningkatkan akurasi lemparan Pointing.", coaching_point: "Lemparan pointing dengan posisi jongkok fokus untuk mendekatkan bosi ke boka dengan titik jatuhan bosi (dropma) disesuaikan 1-2 meter sebelum boka.", target: "Bosi harus masuk ke dalam lingkaran / Circle." }
+                ],
+                gambar: "",
+                video: ""
+            },
+            {
+                id: 2,
+                model: "MODEL LATIHAN 2",
+                nama: "DRILL TACTICAL POINTING - SHOOTING",
+                tujuan_utama: "Melatih lemparan Pointing dan shooting untuk mendapatkan poin.",
+                perlengkapan: ["Lingkaran / Circle 50 Cm = 2 buah", "Bosi = 1 set (3 buah)", "Bosi (Obstacle) = 1 buah", "Boka = 1", "Media Lemparan berbentuk gawang = ukuran tinggi 1 Meter"],
+                layout_latihan: ["Simpan Circle 1 di posisi atlet melempar.", "Simpan media lemparan berbentuk gawang berjarak 2 meter dari lingkaran lempar.", "Simpan Boka di jarak 6 meter.", "Simpan circle 2 di posisi boka", "Simpan Bosi Obstacle/sasaran dengan jarak = 50cm dari boka."],
+                langkah_langkah: [
+                    { deskripsi: "Atlet menyiapkan 3 bosi.", tujuan: "", coaching_point: "", target: "" },
+                    { deskripsi: "Atlet melakukan lemparan ke-1 menggunakan teknik pointing, harus melewati media lemparan gawang.", tujuan: "Meningkatkan akurasi lemparan pointing.", coaching_point: "Lemparan pointing dengan posisi jongkok, hasil lemparan berbentuk lengkungan atau kurva fokus untuk mendekatkan bosi ke boka dengan titik jatuhan bosi (dropma) disesuaikan 1-2 meter sebelum boka.", target: "Bosi harus masuk ke dalam Lingkaran / circle, dan harus lebih dekat ke boka daripada bosi sasaran." },
+                    { deskripsi: "Atlet melakukan lemparan ke-2 menggunakan teknik Shooting.", tujuan: "Meningkatkan akurasi lemparan Shooting.", coaching_point: "Lemparan shooting, hasil lemparan berbentuk lengkungan atau kurva fokus untuk menembak bosi sasaran.", target: "Hasil lemparan harus mengenai bosi sasaran yang ada di lingkaran dan tidak merubah posisi boka." },
+                    { deskripsi: "Atlet melakukan lemparan ke-3 menggunakan teknik pointing, harus melewati media lemparan gawang.", tujuan: "Meningkatkan akurasi lemparan pointing.", coaching_point: "Lemparan pointing dengan posisi jongkok, hasil lemparan berbentuk lengkungan atau kurva fokus untuk mendekatkan bosi ke boka dengan titik jatuhan bosi (dropma) disesuaikan 1-2 meter sebelum boka.", target: "mendapatkan point (Bosi harus masuk ke dalam lingkaran / Circle)." }
+                ],
+                gambar: "",
+                video: ""
+            },
+            {
+                id: 3,
+                model: "MODEL LATIHAN 3",
+                nama: "DRILL SHOOTING – POINTING Recovery",
+                tujuan_utama: "Melatih lemparan shooting untuk mengeluarkan bosi sasaran dan mendapatkan poin.",
+                perlengkapan: ["Lingkaran / Circle 50 Cm = 2 buah", "Bosi = 1 set (3 buah)", "Bosi (Obstacle) = 1 buah", "Boka = 1", "Media Lemparan berbentuk gawang = ukuran tinggi 1 Meter"],
+                layout_latihan: ["Simpan Circle 1 di posisi atlet melempar.", "Simpan media lemparan berbentuk gawang berjarak 2 meter dari lingkaran lempar.", "Simpan Boka di jarak 6 meter.", "Simpan circle 2 di posisi boka", "Simpan Bosi Obstacle/sasaran dengan jarak = 35cm dari boka."],
+                langkah_langkah: [
+                    { deskripsi: "Atlet menyiapkan 3 bosi.", tujuan: "", coaching_point: "", target: "" },
+                    { deskripsi: "Atlet melakukan lemparan ke-1 menggunakan teknik Shooting, harus melewati media lemparan gawang.", tujuan: "Meningkatkan akurasi lemparan shooting.", coaching_point: "Lemparan shooting, hasil lemparan berbentuk lengkungan atau kurva fokus untuk menembak bosi sasaran dan bosi hasil lemparan tidak keluar dari lingkaran.", target: "mengeluarkan Bosi sasaran dan menempatkan bosi di dalam area lingkaran." },
+                    { deskripsi: "Atlet melakukan lemparan ke-2 menggunakan teknik Pointing.", tujuan: "Meningkatkan akurasi lemparan Pointing.", coaching_point: "Lemparan pointing dengan posisi jongkok, hasil lemparan berbentuk lengkungan atau kurva fokus untuk mendekatkan bosi ke boka dengan titik jatuhan bosi (dropma) disesuaikan 1-2 meter sebelum boka.", target: "Bosi harus masuk ke dalam lingkaran / Circle." },
+                    { deskripsi: "Atlet melakukan lemparan ke-3 menggunakan teknik pointing, harus melewati media lemparan gawang.", tujuan: "Meningkatkan akurasi lemparan pointing.", coaching_point: "Lemparan pointing dengan posisi jongkok, hasil lemparan berbentuk lengkungan atau kurva fokus untuk mendekatkan bosi ke boka dengan titik jatuhan bosi (dropma) disesuaikan 1-2 meter sebelum boka.", target: "Bosi harus masuk ke dalam lingkaran / Circle untuk menambah poin." }
+                ],
+                gambar: "",
+                video: ""
+            },
+            {
+                id: 4,
+                model: "MODEL LATIHAN 4 - SITUASI 1",
+                nama: "DRILL DECISION TRAINING",
+                tujuan_utama: "Melatih pengambilan keputusan antara pointing dan shooting",
+                perlengkapan: ["Lingkaran / Circle 50 Cm = 2 buah", "Bosi = 1 set (3 buah)", "Bosi (Obstacle) = 2 buah", "Boka = 1", "Media Lemparan = Gawang tinggi 1 Meter"],
+                layout_latihan: ["Simpan Circle 1 di posisi lempar.", "Boka 6 meter.", "Bosi Obstacle 1 sejajar boka jarak 50cm.", "Bosi Obstacle 2 di sebelah kanan boka."],
+                langkah_langkah: [
+                    { deskripsi: "Atlet menyiapkan 3 bosi.", tujuan: "", coaching_point: "", target: "" },
+                    { deskripsi: "Lemparan ke-1 Pointing (Jongkok).", tujuan: "Akurasi Pointing.", coaching_point: "Menentukan posisi bosi untuk mendapatkan poin (area kosong).", target: "Menempatkan bosi di area kosong." },
+                    { deskripsi: "Lemparan ke-2 Shooting (lewat gawang).", tujuan: "Akurasi Shooting.", coaching_point: "Mengambil keputusan mengeluarkan bosi obstacle.", target: "Memperbesar keunggulan poin." },
+                    { deskripsi: "Lemparan ke-3 Shooting (lewat gawang).", tujuan: "Akurasi Shooting.", coaching_point: "Mengambil keputusan mengeluarkan bosi obstacle.", target: "Memperbesar keunggulan poin." }
+                ],
+                gambar: "",
+                video: ""
+            },
+            {
+                id: 5,
+                model: "MODEL LATIHAN 5",
+                nama: "DRILL BLOCKING POINTING - SHOOTING",
+                tujuan_utama: "Melatih Keterampilan Penempatan Bosi",
+                perlengkapan: ["Lingkaran / Circle 50 Cm", "Bosi = 2 set (6 buah)", "Boka = 1", "Gawang 1 Meter"],
+                layout_latihan: ["Circle 1 di posisi atlet.", "Gawang 2m dari circle.", "Boka jarak 6 meter."],
+                langkah_langkah: [
+                    { deskripsi: "Siapkan 3 bosi Pointing & 3 bosi Shooting.", tujuan: "", coaching_point: "", target: "" },
+                    { deskripsi: "Lemparan ke-1 sampai ke-3 menggunakan teknik Pointing (lewat gawang).", tujuan: "Akurasi Pointing.", coaching_point: "Fokus mendekatkan bosi ke boka.", target: "Menempatkan bosi sejajar untuk menghalangi boka." },
+                    { deskripsi: "Lemparan ke-4 sampai ke-6 menggunakan teknik Shooting.", tujuan: "Akurasi Shooting.", coaching_point: "Menembak bosi yang menghalangi boka.", target: "Menembak bosi tanpa mengeluarkan boka dari lingkaran." }
+                ],
+                gambar: "",
+                video: ""
+            }
+        ];
+
+        // ============================================
+        // LOGIKA MENU & NAVIGASI
+        // ============================================
+        function toggleMenu() {
+            const menuList = document.getElementById('menu-list');
+            menuList.classList.toggle('active');
+        }
+
+        function loadContent(id, el = null) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(c => c.style.display = 'none');
+
+            const target = document.getElementById(id);
+            if (target) target.style.display = 'block';
+
+            if (el) {
+                const menus = document.querySelectorAll('#menu-list li');
+                menus.forEach(m => m.classList.remove('menu-active'));
+                el.classList.add('menu-active');
+                toggleMenu(); 
+            }
+
+            // Hook fungsi render sesuai ID Halaman
+            if (id === 'model-latihan-keterampilan') {
+                renderListModelKeterampilan();
+            } else if (id === 'evaluasi-refleksi') {
+                renderRiwayatBaru();
+            }
+
+            // Menggunakan timeout kecil agar proses scroll mengeksekusi setelah render display:block
+            setTimeout(() => {
+                if (target) target.scrollTop = 0;
+            }, 10);
+        }
+
+        // Jalankan Home saat pertama buka
+        window.onload = function () {
+            loadContent('home', document.getElementById('start'));
+        };
+
+        // ============================================
+        // LOGIKA MENU MODEL LATIHAN KETERAMPILAN
+        // ============================================
+        function renderListModelKeterampilan() {
+            const container = document.getElementById('list-model-container');
+            container.innerHTML = '';
+
+            dataLatihan.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card-latihan';
+                card.innerHTML = `
+                    <div class="card-icon"><span class="material-icons">api</span></div>
+                    <div class="card-info">
+                        <h3>${item.nama}</h3>
+                        <span>${item.model}</span>
+                    </div>
+                    <div class="card-arrow">›</div>
+                `;
+                card.onclick = () => openDetailLatihan(item.id);
+                container.appendChild(card);
+            });
+        }
+
+        let activeModelLatihanId = null;
+
+        function openDetailLatihan(id) {
+            const item = dataLatihan.find(d => d.id === id);
+            if (!item) return;
+
+            activeModelLatihanId = item.id;
+
+            // Handle Render Media Image & Video
+            const mediaArea = document.getElementById('media-area');
+            mediaArea.innerHTML = '';
+            if (item.gambar && item.gambar.trim() !== '') {
+                mediaArea.innerHTML += `<img src="${item.gambar}" style="width:100%; display:block;" alt="Ilustrasi ${item.nama}">`;
+            }
+            if (item.video && item.video.trim() !== '') {
+                mediaArea.innerHTML += `<video controls style="width:100%; display:block;"><source src="${item.video}" type="video/mp4">Browser tidak mendukung pemutaran video.</video>`;
+            }
+
+            // Render Teks & List
+            document.getElementById('dl-judul').innerText = item.nama;
+            document.getElementById('dl-tujuan').innerText = item.tujuan_utama;
+            document.getElementById('dl-perlengkapan').innerHTML = item.perlengkapan.map(p => `<li>${p}</li>`).join('');
+            document.getElementById('dl-layout').innerHTML = item.layout_latihan.map(p => `<li>${p}</li>`).join('');
+
+            // Render Langkah-langkah
+            const langkahArea = document.getElementById('dl-langkah');
+            langkahArea.innerHTML = '';
+            item.langkah_langkah.forEach((step, idx) => {
+                let html = `<div class="praktik-item">
+                    <strong>Langkah ${idx + 1}: ${step.deskripsi}</strong>`;
+                if (step.tujuan && step.tujuan.trim() !== '') html += `<div style="font-size:0.85rem; color:#555"><b>Tujuan:</b> ${step.tujuan}</div>`;
+                if (step.coaching_point && step.coaching_point.trim() !== '') html += `<div style="font-size:0.85rem; color:#555"><b>Tips Pelatih:</b> ${step.coaching_point}</div>`;
+                if (step.target && step.target.trim() !== '') html += `<div style="font-size:0.85rem; color:#d35400"><b>Target:</b> ${step.target}</div>`;
+                html += `</div>`;
+                langkahArea.innerHTML += html;
+            });
+
+            // Ganti action tombol
+            document.getElementById('btn-mulai-latihan').onclick = () => bukaFormLatihan(item.id, item.nama);
+
+            loadContent('detail-latihan-view');
+        }
+
+        // ============================================
+        // LOGIKA FORM LATIHAN & 100 CHECKBOX
+        // ============================================
+        function bukaFormLatihan(id_model, nama_model) {
+            document.getElementById('form-nama-model').innerText = nama_model;
+            document.getElementById('input-keterangan').value = '';
+
+            // Generate 100 Checklist dot
+            const grid = document.getElementById('grid-checklist-baru');
+            grid.innerHTML = '';
+            for (let i = 0; i < 100; i++) {
+                const dot = document.createElement('div');
+                dot.style.width = '100%';
+                dot.style.aspectRatio = '1/1';
+                dot.style.borderRadius = '50%';
+                dot.style.border = '1px solid #ccc';
+                dot.style.background = 'white';
+                dot.dataset.status = '0'; // 0 = Gagal/Belum, 1 = Berhasil
+                
+                dot.onclick = function () {
+                    if (this.dataset.status === '0') {
+                        this.dataset.status = '1';
+                        this.style.background = '#2980b9'; // Warna Biru (Berhasil)
+                        this.style.borderColor = '#2980b9';
+                    } else {
+                        this.dataset.status = '0';
+                        this.style.background = 'white';
+                        this.style.borderColor = '#ccc';
+                    }
+                };
+                grid.appendChild(dot);
+            }
+
+            loadContent('modal-form-baru');
+        }
+
+        function simpanLatihanBaru() {
+            const grid = document.getElementById('grid-checklist-baru');
+            let lemparan_berhasil = 0;
+            
+            // Hitung total checklist biru
+            Array.from(grid.children).forEach(dot => {
+                if (dot.dataset.status === '1') lemparan_berhasil++;
+            });
+
+            const total_lemparan = 100;
+            const nilai = (lemparan_berhasil / total_lemparan) * 100;
+            const keterangan = document.getElementById('input-keterangan').value;
+
+            // Generate Feedback
+            let feedback = "";
+            if (nilai >= 85) feedback = "Sangat Baik";
+            else if (nilai >= 70) feedback = "Baik";
+            else if (nilai >= 55) feedback = "Cukup";
+            else feedback = "Kurang";
+
+            // Buat Struktur Objek Riwayat
+            const riwayatLog = {
+                id_latihan: Date.now(),
+                id_model_latihan: activeModelLatihanId,
+                nama_model: document.getElementById('form-nama-model').innerText,
+                lemparan_berhasil: lemparan_berhasil,
+                id_atlet: 'atlet-1',
+                total_lemparan: total_lemparan,
+                datetime: new Date().toLocaleString('id-ID'),
+                nilai: nilai,
+                feedback: feedback,
+                keterangan: keterangan
+            };
+
+            // Simpan ke LocalStorage
+            let riwayatLatihan = JSON.parse(localStorage.getItem('riwayat_petanque')) || [];
+            riwayatLatihan.unshift(riwayatLog);
+            localStorage.setItem('riwayat_petanque', JSON.stringify(riwayatLatihan));
+
+            alert("Latihan berhasil disimpan!");
+            loadContent('evaluasi-refleksi');
+        }
+
+        // ============================================
+        // LOGIKA CATATAN & EVALUASI
+        // ============================================
+        function renderRiwayatBaru() {
+            let riwayatLatihan = JSON.parse(localStorage.getItem('riwayat_petanque')) || [];
+            const container = document.getElementById('daftar-riwayat');
+            container.innerHTML = '<h3 class="section-title">Riwayat Latihan Terakhir</h3>';
+
+            let totalPoinBerhasil = 0;
+
+            if (riwayatLatihan.length === 0) {
+                container.innerHTML += '<div style="text-align:center; padding:30px; color:#999; font-size:0.9rem;">Belum ada catatan latihan. Mulai latihan untuk melihat evaluasi.</div>';
+            } else {
+                riwayatLatihan.forEach(item => {
+                    totalPoinBerhasil += item.lemparan_berhasil;
+
+                    const card = document.createElement('div');
+                    card.className = 'eval-card';
+                    card.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom: 8px;">
+                            <div>
+                                <div style="font-weight:bold; color:#1e3a5f; font-size: 0.95rem;">${item.nama_model}</div>
+                                <div style="font-size:0.75rem; color:#888;">${item.datetime}</div>
+                            </div>
+                            <div style="text-align:right;">
+                                <div style="font-size:1.3rem; font-weight:bold; color:#27ae60">${item.nilai}%</div>
+                            </div>
+                        </div>
+                        
+                        <div style="font-size: 0.85rem; line-height: 1.5; color: #444; border-top: 1px dashed #eee; padding-top: 8px;">
+                            <b>Total Berhasil:</b> ${item.lemparan_berhasil} dari ${item.total_lemparan} Lemparan<br>
+                            <b>Feedback:</b> <span style="color:#d35400; font-weight:bold;">${item.feedback}</span><br>
+                            ${item.keterangan ? `<b>Catatan:</b> ${item.keterangan}` : ''}
+                        </div>
+                        
+                        <div style="text-align:right; margin-top: 10px;">
+                            <button onclick="hapusRiwayatBaru(${item.id_latihan})" style="border:none; background:none; color:red; font-size:0.8rem; cursor:pointer; font-weight: bold;">🗑️ Hapus Catatan</button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+
+            document.getElementById('total-sesi').textContent = riwayatLatihan.length;
+            document.getElementById('total-poin').textContent = totalPoinBerhasil;
+        }
+
+        function hapusRiwayatBaru(id_latihan) {
+            if (confirm("Hapus catatan latihan ini secara permanen?")) {
+                let riwayatLatihan = JSON.parse(localStorage.getItem('riwayat_petanque')) || [];
+                riwayatLatihan = riwayatLatihan.filter(item => item.id_latihan !== id_latihan);
+                localStorage.setItem('riwayat_petanque', JSON.stringify(riwayatLatihan));
+                renderRiwayatBaru();
+            }
+        }
+    </script>
+</body>
+</html>
