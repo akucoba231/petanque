@@ -2204,3 +2204,205 @@ function renderAnalisisMendalam() {
         dynamicArea.parentElement.scrollLeft = dynamicArea.offsetWidth;
     }, 400);
 }
+
+function exportRiwayatKeXLSX() {
+    // Pastikan library SheetJS (XLSX) sudah termuat
+    if (typeof XLSX === 'undefined') {
+        toast("Library Excel belum siap, periksa koneksi atau script CDN!");
+        return;
+    }
+
+    // 1. Ambil data profil atlet terbaru (dengan failsafe)
+    let profil = dataAtlet;
+    const savedAtlet = localStorage.getItem('petanqueAtlet');
+    if (savedAtlet) {
+        try {
+            profil = JSON.parse(savedAtlet);
+        } catch (e) {
+            profil = dataAtlet;
+        }
+    }
+
+    const namaAtlet = (profil.nama_atlet && profil.nama_atlet.trim() !== "") ? profil.nama_atlet.trim() : "Atlet";
+    const umurAtlet = profil.umur_atlet || "-";
+    const alamatAtlet = (profil.alamat_atlet && profil.alamat_atlet.trim() !== "") ? profil.alamat_atlet.trim() : "Tanpa_Alamat";
+
+    // 2. Ambil data riwayat latihan
+    const riwayat = ambilRiwayat();
+    if (!riwayat || riwayat.length === 0) {
+        toast("Belum ada data riwayat latihan untuk diekspor!");
+        return;
+    }
+
+    // 3. Susun struktur baris awal (Header Laporan & Biodata Atlet)
+    const sheetData = [
+        ["Laporan Hasil Latihan Atlet Petanque"],
+        [`Nama Atlet : ${namaAtlet}`],
+        [`Umur  : ${umurAtlet}`],
+        [`Alamat : ${alamatAtlet}`],
+        [], // Baris kosong sebagai pemisah
+        ["No", "Tanggal", "Model Latihan", "Jenis Latihan", "Rincian", "Umpan Balik"] // Header Tabel
+    ];
+
+    // Balik urutan agar Nomor 1 dimulai dari latihan paling awal (kronologis), 
+    // atau hapus .slice().reverse() jika ingin urutan terbaru di atas.
+    const dataUrut = riwayat.slice().reverse();
+
+    // 4. Looping data riwayat dengan Failsafe 3 Lapis
+    dataUrut.forEach((item, index) => {
+        const no = index + 1;
+        const tanggal = item.tanggal ? (item.waktu ? `${item.tanggal} (${item.waktu})` : item.tanggal) : "-";
+        const modelLatihan = item.nama_model || "Latihan Mandiri";
+
+        let jenisLatihanText = "-";
+        let rincianText = "";
+        let sesiBerhasil = 0;
+        let sesiTotal = 100;
+
+        // LAPIS 1: Memiliki field 'rincian' (Data Dinamis Pointing & Shooting)
+        if (typeof item.rincian !== 'undefined' && item.rincian !== null) {
+            const pObj = item.rincian.pointing || {};
+            const sObj = item.rincian.shooting || {};
+
+            const pBerhasil = parseInt(pObj.skor_berhasil ?? pObj.berhasil) || 0;
+            const pGagal = parseInt(pObj.skor_gagal ?? pObj.gagal) || 0;
+            const pTotal = parseInt(pObj.total_skor ?? pObj.total) || (pBerhasil + pGagal);
+            const pPersen = typeof pObj.persentase === 'number' ? pObj.persentase : (pTotal > 0 ? Math.round((pBerhasil / pTotal) * 100) : 0);
+
+            const sBerhasil = parseInt(sObj.skor_berhasil ?? sObj.berhasil) || 0;
+            const sGagal = parseInt(sObj.skor_gagal ?? sObj.gagal) || 0;
+            const sTotal = parseInt(sObj.total_skor ?? sObj.total) || (sBerhasil + sGagal);
+            const sPersen = typeof sObj.persentase === 'number' ? sObj.persentase : (sTotal > 0 ? Math.round((sBerhasil / sTotal) * 100) : 0);
+
+            sesiBerhasil = pBerhasil + sBerhasil;
+            const sesiGagal = pGagal + sGagal;
+            sesiTotal = (pTotal + sTotal) || parseInt(item.total_skor ?? item.total_lemparan) || 100;
+
+            // Tentukan label Jenis Latihan
+            if (pTotal > 0 && sTotal > 0) {
+                jenisLatihanText = "Pointing & Shooting (Campuran)";
+            } else if (pTotal > 0) {
+                jenisLatihanText = "Pointing";
+            } else if (sTotal > 0) {
+                jenisLatihanText = "Shooting";
+            } else {
+                jenisLatihanText = "-";
+            }
+
+            // Susun teks kolom Rincian
+            let detailParts = [];
+            if (pTotal > 0) {
+                detailParts.push(`Pointing: ${pBerhasil}/${pTotal} (Berhasil: ${pBerhasil}, Gagal: ${pGagal}, Akurasi: ${pPersen}%)`);
+            }
+            if (sTotal > 0) {
+                detailParts.push(`Shooting: ${sBerhasil}/${sTotal} (Berhasil: ${sBerhasil}, Gagal: ${sGagal}, Akurasi: ${sPersen}%)`);
+            }
+            detailParts.push(`Total: ${sesiBerhasil}/${sesiTotal} (${item.persentase ?? Math.round((sesiBerhasil / sesiTotal) * 100)}%)`);
+
+            rincianText = detailParts.join(" | ");
+        }
+        // LAPIS 2: Tidak ada 'rincian', tetapi memiliki 'jenis_latihan'
+        else if (
+            typeof item.jenis_latihan !== 'undefined' &&
+            item.jenis_latihan !== null &&
+            String(item.jenis_latihan).trim() !== ""
+        ) {
+            const rawJenis = String(item.jenis_latihan).trim();
+            jenisLatihanText = rawJenis.charAt(0).toUpperCase() + rawJenis.slice(1).toLowerCase();
+
+            sesiBerhasil = parseInt(item.skor_berhasil ?? item.skor) || 0;
+            const sesiGagal = typeof item.skor_gagal !== 'undefined'
+                ? parseInt(item.skor_gagal)
+                : Math.max(0, (parseInt(item.total_lemparan) || 100) - sesiBerhasil);
+            sesiTotal = parseInt(item.total_skor) || (sesiBerhasil + sesiGagal) || parseInt(item.total_lemparan) || 100;
+            const persen = typeof item.persentase !== 'undefined' ? item.persentase : Math.round((sesiBerhasil / sesiTotal) * 100);
+
+            rincianText = `Berhasil: ${sesiBerhasil}, Gagal: ${sesiGagal}, Total: ${sesiTotal} (${persen}%)`;
+        }
+        // LAPIS 3 (ELSE TERAKHIR): Tidak ada 'rincian' dan tidak ada 'jenis_latihan'
+        else {
+            jenisLatihanText = "-";
+
+            sesiBerhasil = parseInt(item.skor_berhasil ?? item.skor) || 0;
+            sesiTotal = parseInt(item.total_skor ?? item.total_lemparan) || 100;
+            const sesiGagal = typeof item.skor_gagal !== 'undefined'
+                ? parseInt(item.skor_gagal)
+                : Math.max(0, sesiTotal - sesiBerhasil);
+            const persen = typeof item.persentase !== 'undefined' ? item.persentase : Math.round((sesiBerhasil / sesiTotal) * 100);
+
+            rincianText = `Berhasil: ${sesiBerhasil}, Gagal: ${sesiGagal}, Total: ${sesiTotal} (${persen}%)`;
+        }
+
+        // Failsafe Umpan Balik
+        const persenAkhir = typeof item.persentase !== 'undefined'
+            ? item.persentase
+            : Math.round((sesiBerhasil / (sesiTotal || 1)) * 100);
+        const umpanBalik = item.umpan_balik || tentukanUmpanBalik(persenAkhir);
+
+        // Masukkan baris ke tabel
+        sheetData.push([
+            no,
+            tanggal,
+            modelLatihan,
+            jenisLatihanText,
+            rincianText,
+            umpanBalik
+        ]);
+    });
+
+    // 5. Buat Workbook dan Worksheet
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.aoa_to_sheet(sheetData);
+
+    // Opsional: Menggabungkan sel (Merge Cells) untuk baris judul & biodata agar tidak terpotong di kolom A
+    ws['!merges'] = [
+        { s: { r: 0, c: 0 }, e: { r: 0, c: 5 } }, // Merge baris 1 (Judul) dari kolom A sampai F
+        { s: { r: 1, c: 0 }, e: { r: 1, c: 5 } }, // Merge baris 2 (Nama Atlet)
+        { s: { r: 2, c: 0 }, e: { r: 2, c: 5 } }, // Merge baris 3 (Umur)
+        { s: { r: 3, c: 0 }, e: { r: 3, c: 5 } }  // Merge baris 4 (Alamat)
+    ];
+
+    // Atur lebar kolom agar rapi saat dibuka di Excel
+    ws['!cols'] = [
+        { wch: 5 },  // Kolom A: No
+        { wch: 20 }, // Kolom B: Tanggal
+        { wch: 32 }, // Kolom C: Model Latihan
+        { wch: 25 }, // Kolom D: Jenis Latihan
+        { wch: 65 }, // Kolom E: Rincian
+        { wch: 16 }  // Kolom F: Umpan Balik
+    ];
+
+    XLSX.utils.book_append_sheet(wb, ws, "Riwayat Latihan");
+
+    // 6. Format Nama File: nama_atlet-alamat_atlet-timestamp.xlsx
+    // Sanitasi karakter ilegal pada nama file (seperti garis miring, titik dua, atau baris baru pada textarea alamat)
+    const cleanStr = (str) => String(str)
+        .replace(/[\r\n]+/g, ' ')
+        .replace(/[\\/:*?"<>|]/g, '')
+        .trim()
+        .replace(/\s+/g, '_');
+
+    const timestamp = Date.now(); // Atau bisa gunakan format YYYYMMDD_HHMMSS
+    const fileName = `${cleanStr(namaAtlet)}-${cleanStr(alamatAtlet)}-${timestamp}.xlsx`;
+
+    // 7. Generate Base64 (Tanpa Blob agar tidak dicekal WebView)
+    const base64Excel = XLSX.write(wb, { bookType: 'xlsx', type: 'base64' });
+    const dataUri = "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," + base64Excel;
+
+    // Jika Anda memiliki JavascriptInterface di Android WebView (opsional), bisa dipanggil di sini:
+    if (window.AndroidInterface && typeof window.AndroidInterface.downloadBase64File === 'function') {
+        window.AndroidInterface.downloadBase64File(dataUri, fileName);
+        toast("Mengunduh file Excel...");
+        return;
+    }
+
+    // Trigger unduhan menggunakan Data URI Base64 murni pada elemen <a>
+    const link = document.createElement("a");
+    link.href = dataUri;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    toast("File Excel berhasil diekspor!");
+}
