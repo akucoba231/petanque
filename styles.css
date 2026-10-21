@@ -449,6 +449,7 @@ nav {
     margin-bottom: 5px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    text-shadow: 2px 1px 3px #fff;
 }
 
 .section-desc {
