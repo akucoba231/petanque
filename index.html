@@ -7,6 +7,8 @@
     <title>PETANQUE MASTERY</title>
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
 </head>
 
 <body>
@@ -340,9 +342,14 @@
                 </div>
             </div>
 
-            <div class="eval-card">
+            <div class="eval-card" style="display: flex; flex-direction: column; gap: 10px;">
                 <button onclick="bukaFormLatihan()" class="btn-menu bg-blue" style="width:100%; border-radius:8px;">
                     <span>➕ Mulai Latihan Baru</span>
+                    <span class="arrow">›</span>
+                </button>
+                
+                <button onclick="exportRiwayatKeXLSX()" class="btn-menu bg-green" style="width:100%; border-radius:8px; background:#1e8449; color:#fff;">
+                    <span>📥 Export Laporan: Excel</span>
                     <span class="arrow">›</span>
                 </button>
             </div>
