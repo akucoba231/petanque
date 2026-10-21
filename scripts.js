@@ -682,7 +682,7 @@ function renderRiwayat() {
         card.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
             <div style="flex:1; padding-right:10px;">
-                <div style="font-weight:bold; color:#1e3a5f; font-size:0.95rem;">${item.nama_model}</div>
+                <div style="font-weight:bold; color:#1e3a5f; font-size:0.95rem;">${typeof item.jenis_latihan === undefined ? '' : item.jenis_latihan.toUpperCase() + " : " }${item.nama_model}</div>
                 <div style="font-size:0.75rem; color:#888">${item.tanggal} | ${item.waktu}</div>
                 <div style="font-size:0.7rem; color:#aaa; margin-top:2px;">Target: ${item.total_lemparan || 100} Pukulan</div>
             </div>
@@ -978,6 +978,8 @@ function updateUIProfil() {
 }
 
 function prosesSimpanRiwayat() {
+    counterLock = 0;
+    lockJenisLatihan();
     const selectModel = document.getElementById('select-model-latihan');
     const modelId = selectModel.value;
     const catatan = document.getElementById('input-catatan-atlet').value;
@@ -988,6 +990,9 @@ function prosesSimpanRiwayat() {
         return;
     }
 
+    const radioJenis = document.querySelector('#utama input[name="jenis_latihan"]:checked') || document.querySelector('input[name="jenis_latihan"]:checked');
+    const jenisLatihan = radioJenis ? radioJenis.value : "pointing";
+
     const skorBerhasil = statusLemparan.filter(s => s === 1).length;
     const totalLemparan = statusLemparan.length; // DINAMIS
     const persentase = Math.round((skorBerhasil / totalLemparan) * 100);
@@ -997,6 +1002,7 @@ function prosesSimpanRiwayat() {
         id_atlet: dataAtlet.id_atlet,
         id_model: parseInt(modelId),
         nama_model: selectModel.options[selectModel.selectedIndex].text,
+        jenis_latihan: jenisLatihan,
         tanggal: new Date().toISOString().split('T')[0],
         waktu: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         skor_berhasil: skorBerhasil,
@@ -1018,9 +1024,10 @@ function prosesSimpanRiwayat() {
 
 // Variable untuk menyimpan status 100 lemparan (0: Belum, 1: Berhasil, 2: Gagal)
 //let statusLemparan = Array(100).fill(0);
-
+/*
 function generateChecklist() {
     const container = document.getElementById('checklist-container');
+    
     if (!container) return;
     
     container.innerHTML = ''; // Bersihkan
@@ -1034,6 +1041,7 @@ function generateChecklist() {
         
         // Logika klik: Belum -> Berhasil -> Gagal -> Belum (Rotasi)
         dot.onclick = function() {
+
             if (statusLemparan[i] === 0) {
                 statusLemparan[i] = 1; // Berhasil
                 this.className = 'dot-check dot-status-1';
@@ -1050,13 +1058,16 @@ function generateChecklist() {
         container.appendChild(dot);
     }
 }
+*/
 
 // Fungsi hitung skor real-time
 let statusLemparan = []; // Biarkan kosong, akan diisi saat generate
+let counterLock = 0;
 
 function generateChecklist() {
     const container = document.getElementById('checklist-container');
     const inputTotal = document.getElementById('input-total-lemparan');
+
     if (!container || !inputTotal) return;
     
     const total = parseInt(inputTotal.value) || 100;
@@ -1069,21 +1080,55 @@ function generateChecklist() {
         dot.textContent = i + 1;
         
         dot.onclick = function() {
+            let radioLatihan = document.querySelector('input[name="jenis_latihan"]:checked');
+            // ternyata ini fungsi paling tepat, meski membuat dinamika dan rawan error
+            // jika atlet melakukan perubahan setelah data diinput akan menyebabkan error
+
+            if(radioLatihan.value === ""){
+                toast("Mohon pilih jenis latihan!");
+                counterLock = 0;
+                return;
+            }
+            else {
+                this.textContent = radioLatihan.value === "pointing" ? "P" : (radioLatihan.value === "shooting" ? "S" : toast("Mohon pilih jenis latihan"));
+            }
+
             if (statusLemparan[i] === 0) {
                 statusLemparan[i] = 1;
                 this.className = 'dot-check dot-status-1';
+                counterLock++;
             } else if (statusLemparan[i] === 1) {
                 statusLemparan[i] = 2;
                 this.className = 'dot-check dot-status-2';
+                counterLock++;
             } else {
                 statusLemparan[i] = 0;
                 this.className = 'dot-check dot-status-0';
             }
             updateLiveScore();
+            lockJenisLatihan();
         };
         container.appendChild(dot);
     }
     updateLiveScore();
+}
+
+function lockJenisLatihan(){
+    // Mengambil semua radio button berdasarkan nama grupnya
+    const radioButtons = document.querySelectorAll('input[name="jenis_latihan"]');
+    
+    if(counterLock>0){
+        radioButtons.forEach(radio => {
+            radio.disabled = true; // Membuatnya read-only / tidak bisa diklik
+        });
+
+    }
+    else {
+        radioButtons.forEach(radio => {
+            radio.disabled = false; // Membuatnya bisa diklik
+        });
+
+    }
 }
 
 function updateLiveScore() {
@@ -1283,8 +1328,13 @@ function initChartPerforma() {
     // Sumbu X: Mengambil total_lemparan per sesi
     const labels = dataTerakhir.map(item => item.total_lemparan || 100);
     
-    // Sumbu Y: Mengambil persentase per sesi
-    const scores = dataTerakhir.map(item => item.persentase);
+    // Sumbu Y: Nilai akurasi per jenis latihan (pointing, shooting, old)
+    const dataPointing = dataTerakhir.map(item => (item.jenis_latihan || '').toLowerCase() === 'pointing' ? item.persentase : null);
+    const dataShooting = dataTerakhir.map(item => (item.jenis_latihan || '').toLowerCase() === 'shooting' ? item.persentase : null);
+    const dataOld = dataTerakhir.map(item => {
+        const jenis = (item.jenis_latihan || '').toLowerCase();
+        return (jenis !== 'pointing' && jenis !== 'shooting') ? item.persentase : null;
+    });
 
     if (myChart) myChart.destroy();
 
@@ -1292,16 +1342,41 @@ function initChartPerforma() {
         type: 'line',
         data: {
             labels: labels,
-            datasets: [{
-                label: 'Akurasi (%)',
-                data: scores,
-                borderColor: '#1e3a5f',
-                backgroundColor: 'rgba(30, 58, 95, 0.1)',
-                borderWidth: 3,
-                fill: true,
-                tension: 0.4,
-                pointRadius: 4
-            }]
+            datasets: [
+                {
+                    label: 'Pointing',
+                    data: dataPointing,
+                    borderColor: '#27ae60',
+                    backgroundColor: 'rgba(39, 174, 96, 0.1)',
+                    borderWidth: 3,
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    spanGaps: true
+                },
+                {
+                    label: 'Shooting',
+                    data: dataShooting,
+                    borderColor: '#c0392b',
+                    backgroundColor: 'rgba(192, 57, 43, 0.1)',
+                    borderWidth: 3,
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    spanGaps: true
+                },
+                {
+                    label: 'Old',
+                    data: dataOld,
+                    borderColor: '#1e3a5f',
+                    backgroundColor: 'rgba(30, 58, 95, 0.1)',
+                    borderWidth: 3,
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    spanGaps: true
+                }
+            ]
         },
         options: {
             responsive: true,
@@ -1321,7 +1396,21 @@ function initChartPerforma() {
                 }
             },
             plugins: {
-                legend: { display: false }
+                legend: {
+                    display: true,
+                    labels: {
+                        boxWidth: 10,
+                        font: { size: 10 }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: (item) => {
+                            if (item.parsed.y === null || item.parsed.y === undefined) return null;
+                            return ` ${item.dataset.label}: ${item.parsed.y}%`;
+                        }
+                    }
+                }
             }
         }
     });
@@ -1345,6 +1434,14 @@ function renderAnalisisMendalam() {
     // Sumbu Y: Persentase per sesi
     const skorHanya = dataFull.map(d => d.persentase);
 
+    // Sumbu Y per jenis latihan
+    const dataPointing = dataFull.map(item => (item.jenis_latihan || '').toLowerCase() === 'pointing' ? item.persentase : null);
+    const dataShooting = dataFull.map(item => (item.jenis_latihan || '').toLowerCase() === 'shooting' ? item.persentase : null);
+    const dataOld = dataFull.map(item => {
+        const jenis = (item.jenis_latihan || '').toLowerCase();
+        return (jenis !== 'pointing' && jenis !== 'shooting') ? item.persentase : null;
+    });
+
     document.getElementById('val-tertinggi').textContent = Math.max(...skorHanya) + "%";
     document.getElementById('val-terendah').textContent = Math.min(...skorHanya) + "%";
 
@@ -1357,26 +1454,60 @@ function renderAnalisisMendalam() {
         type: 'line',
         data: {
             labels: labels,
-            datasets: [{
-                label: 'Akurasi (%)',
-                data: skorHanya,
-                borderColor: '#2980b9',
-                backgroundColor: 'rgba(41, 128, 185, 0.1)',
-                borderWidth: 4,
-                fill: true,
-                tension: 0.3,
-                pointRadius: 5
-            }]
+            datasets: [
+                {
+                    label: 'Pointing',
+                    data: dataPointing,
+                    borderColor: '#27ae60',
+                    backgroundColor: 'rgba(39, 174, 96, 0.1)',
+                    borderWidth: 4,
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    spanGaps: true
+                },
+                {
+                    label: 'Shooting',
+                    data: dataShooting,
+                    borderColor: '#c0392b',
+                    backgroundColor: 'rgba(192, 57, 43, 0.1)',
+                    borderWidth: 4,
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    spanGaps: true
+                },
+                {
+                    label: 'Old',
+                    data: dataOld,
+                    borderColor: '#1e3a5f',
+                    backgroundColor: 'rgba(30, 58, 95, 0.1)',
+                    borderWidth: 4,
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    spanGaps: true
+                }
+            ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { display: false },
+                legend: {
+                    display: true,
+                    labels: {
+                        boxWidth: 12,
+                        font: { size: 11 }
+                    }
+                },
                 tooltip: {
                     callbacks: {
                         title: (items) => `Beban: ${items[0].label} Lemparan`,
-                        label: (item) => ` Akurasi: ${item.parsed.y}%`
+                        label: (item) => {
+                            if (item.parsed.y === null || item.parsed.y === undefined) return null;
+                            return ` ${item.dataset.label}: ${item.parsed.y}%`;
+                        }
                     }
                 }
             },
