@@ -1,28 +1,28 @@
 // Data ini untuk menu pengantar 
 const dataPengantar = [
-{
-    id: "perkembangan",
-    judul: "Perkembangan Cabang Olahraga Petanque",
-    konten: `
+    {
+        id: "perkembangan",
+        judul: "Perkembangan Cabang Olahraga Petanque",
+        konten: `
     <h3>Sejarah Lahirnya Petanque</h3>
     <p>Olahraga petanque memiliki sejarah panjang yang berakar dari zaman kuno. Pada awal abad ke-6 SM, orang Yunani Kuno telah memainkan permainan melempar koin, batu datar, dan bola batu yang disebut spheristics. Bangsa Romawi Kuno kemudian memodifikasi permainan ini dengan menambahkan sebuah target sasaran.</p>
     <p>Pada abad pertengahan, permainan ini mulai dikenal luas di seluruh Eropa dengan sebutan 'boule' atau bola. Sejarah mencatat permainan ini pernah dilarang dimainkan oleh rakyat jelata pada masa Raja Henry III di Inggris serta masa Charles IV dan Charles V di Prancis, sebelum akhirnya larangan tersebut dicabut pada abad ke-17.</p>
-    
+
     <h3>Perkembangan Petanque Modern</h3>
     <p>Prancis adalah negara yang paling berjasa dalam menyosialisasikan dan mengembangkan petanque. Versi modern dari permainan ini diperkenalkan oleh Jules Boule Lenoir pada tahun 1907 di kota La Ciotat, Provence, Prancis Selatan.</p>
     <p>Kata "Petanque" berasal dari dialek bahasa Occitan, yaitu Les Ped Tanco atau Petanca, yang berarti "kaki rapat". Hal ini merujuk pada aturan dasar di mana pemain harus melempar tanpa mengangkat kaki dari tanah.</p>
-    
+
     <h3>Sejarah Petanque di Indonesia</h3>
     <p>Di Indonesia, petanque awalnya dimainkan sebagai sarana silaturahmi oleh para ekspatriat (warga negara asing). Perkembangan olahraga petanque secara formal sebagai olahraga prestasi dimulai saat persiapan SEA Games 2011 di Jakarta-Palembang.</p>
     <p>Atas instruksi Komite Olimpiade Indonesia (KOI), Federasi Olahraga Petanque Indonesia (FOPI) dibentuk pada tanggal 18 Maret 2011. FOPI resmi menjadi anggota KOI pada 25 Februari 2015 dan menjadi anggota KONI Pusat pada 25 Maret 2015.</p>
-    `
-},
-{
-    id: "teknik-dasar",
-    judul: "Teknik Dasar Cabang Olahraga Petanque",
-    konten: `
+            `
+        },
+        {
+            id: "teknik-dasar",
+            judul: "Teknik Dasar Cabang Olahraga Petanque",
+            konten: `
     <p>Tujuan utama permainan petanque adalah melempar bola besi (bosi) sedekat mungkin dengan target bola kayu (boka).</p>
-    
+
     <h3>Cara Memegang Bosi</h3>
     <p>Cara memegang bosi sangat memengaruhi akurasi lemparan. Langkah-langkahnya adalah:</p>
     <ol>
@@ -54,14 +54,14 @@ const dataPengantar = [
     <li><strong>Short Shot:</strong> Pukulan pendek di mana bosi memantul sekitar 20-30 cm sebelum mengenai bosi lawan.</li>
     <li><strong>Shot On The Iron:</strong> Lemparan langsung ke udara yang tepat mengenai bosi lawan tanpa menyentuh tanah terlebih dahulu.</li>
     </ul>
-    `
-},
-{
-    id: "peraturan",
-    judul: "Peraturan Permainan Cabang Olahraga Petanque",
-    konten: `
+                `
+            },
+            {
+                id: "peraturan",
+                judul: "Peraturan Permainan Cabang Olahraga Petanque",
+                konten: `
     <p>Olahraga petanque mengacu pada peraturan resmi <strong>Fédération Internationale de Pétanque et Jeu Provençal (FIPJP)</strong>.</p>
-    
+
     <h3>Kategori dan Komposisi Pemain</h3>
     <ul>
     <li><strong>Triple:</strong> 3 pemain melawan 3 pemain (Setiap pemain menggunakan 2 bosi).</li>
@@ -86,9 +86,9 @@ const dataPengantar = [
     <li>Waktu maksimal untuk melempar bosi adalah 1 menit setelah boka dilempar atau setelah bosi terakhir berhenti bergulir.</li>
     <li>Tim yang bosinya berada lebih jauh dari boka harus terus melempar bosinya sampai mereka berhasil merebut poin (lebih dekat) atau sampai bosi mereka habis.</li>
     </ol>
-    `
-}
-];
+                    `
+                }
+            ];
 
 // Data ini untuk menu Latihan Pointing
 // const dataPointing = [
@@ -205,66 +205,66 @@ const dataPengantar = [
 
 // Untuk menyimpan Data Latihan / Evaluasi
 // Array untuk menyimpan hasil latihan (Riwayat)
-let riwayatLatihan = [];
+            let riwayatLatihan = [];
 
 // Struktur tugas berdasarkan kategori dan level
-const programTugas = {
-    pointing: {
-        'rolling': "Lakukan Rolling jarak 6 meter. Fokus pada pelepasan bola yang lembut.",
-        'soft-lob': "Lakukan Soft Lob melewati rintangan tengah. Fokus pada titik jatuh (donnee).",
-        'full-lob': "Lakukan Full Lob parabola tinggi. Fokus pada putaran bola (backspin)."
-    },
-    shooting: {
-        'shooting-1': "Lakukan Ground Shoot. Bola harus mengenai tanah 2 meter sebelum target.",
-        'shooting-2': "Lakukan Short Shot. Bola harus jatuh maksimal 50cm di depan target.",
-        'shooting-3': "Lakukan Shot on the Iron. Bola harus mengenai langsung besi lawan."
-    }
-};
+            const programTugas = {
+                pointing: {
+                    'rolling': "Lakukan Rolling jarak 6 meter. Fokus pada pelepasan bola yang lembut.",
+                    'soft-lob': "Lakukan Soft Lob melewati rintangan tengah. Fokus pada titik jatuh (donnee).",
+                    'full-lob': "Lakukan Full Lob parabola tinggi. Fokus pada putaran bola (backspin)."
+                },
+                shooting: {
+                    'shooting-1': "Lakukan Ground Shoot. Bola harus mengenai tanah 2 meter sebelum target.",
+                    'shooting-2': "Lakukan Short Shot. Bola harus jatuh maksimal 50cm di depan target.",
+                    'shooting-3': "Lakukan Shot on the Iron. Bola harus mengenai langsung besi lawan."
+                }
+            };
 
-const menuList = document.getElementById('menu-list');
-const wrapperUtama = document.getElementById('utama');
+            const menuList = document.getElementById('menu-list');
+            const wrapperUtama = document.getElementById('utama');
 
-function toggleMenu() {
-    menuList.classList.toggle('active');
-}
+            function toggleMenu() {
+                menuList.classList.toggle('active');
+            }
 
         // Simpan referensi elemen aktif secara global
-        let currentActiveMenu = null
+            let currentActiveMenu = null
 
-        function loadContent(id, element) {
-            const source = document.getElementById(id);
-            if (source) {
-                wrapperUtama.innerHTML = source.innerHTML;
-                menuList.classList.remove('active');
-                document.getElementById('utama').scrollTo(0, 0);
+            function loadContent(id, element) {
+                const source = document.getElementById(id);
+                if (source) {
+                    wrapperUtama.innerHTML = source.innerHTML;
+                    menuList.classList.remove('active');
+                    document.getElementById('utama').scrollTo(0, 0);
 
                 // TAMBAHAN BARU: Memicu render data JSON jika menu yang dibuka adalah "model-latihan"
-                if (id === 'model-latihan') {
-                    renderDaftarLatihan();
-                }
+                    if (id === 'model-latihan') {
+                        renderDaftarLatihan();
+                    }
                 // TAMBAHKAN INI:
-                else if (id === 'evaluasi-refleksi') {
+                    else if (id === 'evaluasi-refleksi') {
                 // Ambil data dari LocalStorage ke variabel global dulu
-                riwayatLatihan = ambilRiwayat(); 
+                        riwayatLatihan = ambilRiwayat(); 
                 // Baru gambar ke layar
-                renderRiwayat(); 
-                }
-                else if (id === 'home') {
-                renderDashboardHome();
-                }
-                else if (id === 'statistik-mendalam') {
+                        renderRiwayat(); 
+                    }
+                    else if (id === 'home') {
+                        renderDashboardHome();
+                    }
+                    else if (id === 'statistik-mendalam') {
                 renderAnalisisMendalam(); // Versi Raksasa (Semua data)
-                }
+            }
 
                 // OPTIMASI: Hapus class dari elemen lama tanpa loop querySelectorAll
-                if (currentActiveMenu) {
-                    currentActiveMenu.classList.remove('menu-active');
-                }
+            if (currentActiveMenu) {
+                currentActiveMenu.classList.remove('menu-active');
+            }
 
                 // Jika dipanggil dari klik (element tersedia)
-                let targetMenu = element || document.querySelector('[data-id="' + id + '"]');
-                if (element) {
-                    element.classList.add('menu-active');
+            let targetMenu = element || document.querySelector('[data-id="' + id + '"]');
+            if (element) {
+                element.classList.add('menu-active');
                     currentActiveMenu = element; // Update referensi aktif
                 } else {
                     // Jika dipanggil saat window.onload
@@ -472,12 +472,12 @@ function toggleMenu() {
             // Versi dengan CSS tambahan agar lebih cantik
             document.getElementById('d-indikator').innerHTML = `
             <div class="praktik-list">
-            ${data.praktik.map(p => `
+                ${data.praktik.map(p => `
                 <div class="praktik-item">
                 <strong>${p.level}</strong>
                 <span>${p.deskripsi}</span>
                 </div>
-                `).join('')}
+                    `).join('')}
             </div>
             `;
 
@@ -530,66 +530,66 @@ function toggleMenu() {
 
         // form latihan baru 
         // Variabel pembantu untuk tracking asal halaman
-let idModelTerpilih = null;
+        let idModelTerpilih = null;
 
-function bukaFormLatihan(idModelLatihan = null) {
-    idModelTerpilih = idModelLatihan;
-    loadContent('form-latihan-baru');
+        function bukaFormLatihan(idModelLatihan = null) {
+            idModelTerpilih = idModelLatihan;
+            loadContent('form-latihan-baru');
 
     // Tambahkan input jumlah percobaan secara dinamis jika belum ada
-    const container = document.querySelector('#utama .page-padding');
-    const headerCard = container.querySelector('.form-header-card');
-    
-    if (!document.getElementById('input-total-lemparan')) {
-        const divPercobaan = document.createElement('div');
-        divPercobaan.className = 'detail-card';
-        divPercobaan.innerHTML = `
+            const container = document.querySelector('#utama .page-padding');
+            const headerCard = container.querySelector('.form-header-card');
+
+            if (!document.getElementById('input-total-lemparan')) {
+                const divPercobaan = document.createElement('div');
+                divPercobaan.className = 'detail-card';
+                divPercobaan.innerHTML = `
             <label class="detail-label">Jumlah Percobaan</label>
             <div style="display: flex; gap: 10px;">
                 <input type="number" id="input-total-lemparan" class="input-style" value="100" min="1" max="500">
                 <button onclick="generateChecklist()" class="btn-kecil" style="background:#1e3a5f; color:white; border:none; border-radius:5px; padding:0 15px;">Set</button>
             </div>
-            <p style="font-size: 0.7rem; color: #888; margin-top: 5px;">*Ubah angka dan klik Set untuk mereset jumlah kotak.</p>
-        `;
+            <p style="font-size: 0.7rem; color: #333; margin-top: 5px;">*Ubah angka dan klik Set untuk mereset jumlah kotak.</p>
+                `;
         // Sisipkan setelah header card
-        headerCard.parentNode.insertBefore(divPercobaan, headerCard.nextSibling);
-    }
+                headerCard.parentNode.insertBefore(divPercobaan, headerCard.nextSibling);
+            }
 
     // Inisialisasi Score Box
-    if (!document.getElementById('live-score-box')) {
-        const scoreBox = document.createElement('div');
-        scoreBox.id = 'live-score-box';
-        scoreBox.className = 'score-summary';
-        scoreBox.innerHTML = `
+            if (!document.getElementById('live-score-box')) {
+                const scoreBox = document.createElement('div');
+                scoreBox.id = 'live-score-box';
+                scoreBox.className = 'score-summary';
+                scoreBox.innerHTML = `
             <div>✅ Berhasil: <span id="live-berhasil">0</span></div>
             <div>❌ Gagal: <span id="live-gagal">0</span></div>
-        `;
-        const textarea = document.getElementById('input-catatan-atlet');
-        textarea.parentNode.insertBefore(scoreBox, textarea);
-    }
+                `;
+                const textarea = document.getElementById('input-catatan-atlet');
+                textarea.parentNode.insertBefore(scoreBox, textarea);
+            }
 
-    const selectModel = document.getElementById('select-model-latihan');
-    const btnKembali = document.getElementById('kembali-form');
-    
-    selectModel.innerHTML = '<option value="">-- Pilih Model Latihan --</option>';
-    dataModelLatihan.forEach(item => {
-        const opt = document.createElement('option');
-        opt.value = item.id;
-        opt.textContent = `${item.model} - ${item.nama}`;
-        selectModel.appendChild(opt);
-    });
+            const selectModel = document.getElementById('select-model-latihan');
+            const btnKembali = document.getElementById('kembali-form');
 
-    if (idModelLatihan !== null) {
-        selectModel.value = idModelLatihan;
-        selectModel.disabled = true;
-        updateInfoModel(idModelLatihan);
-        btnKembali.onclick = () => openDetailLatihanKeterampilan(idModelLatihan);
-    } else {
-        selectModel.disabled = false;
-        selectModel.value = "";
-        updateInfoModel(null);
-        btnKembali.onclick = () => loadContent('evaluasi-refleksi');
-    }
+            selectModel.innerHTML = '<option value="">-- Pilih Model Latihan --</option>';
+            dataModelLatihan.forEach(item => {
+                const opt = document.createElement('option');
+                opt.value = item.id;
+                opt.textContent = `${item.model} - ${item.nama}`;
+                selectModel.appendChild(opt);
+            });
+
+            if (idModelLatihan !== null) {
+                selectModel.value = idModelLatihan;
+                selectModel.disabled = true;
+                updateInfoModel(idModelLatihan);
+                btnKembali.onclick = () => openDetailLatihanKeterampilan(idModelLatihan);
+            } else {
+                selectModel.disabled = false;
+                selectModel.value = "";
+                updateInfoModel(null);
+                btnKembali.onclick = () => loadContent('evaluasi-refleksi');
+            }
 
     generateChecklist(); // Memanggil generator yang sudah dinamis
 }
@@ -601,42 +601,42 @@ function resetChecklistLatihan() {
 }
 
         // Update Dropdown Level berdasarkan Kategori
-        function updateTugas() {
-            const kat = document.getElementById('select-kategori').value;
-            const levelSelect = document.getElementById('select-level');
-            const deskripsi = document.getElementById('tugas-deskripsi');
+function updateTugas() {
+    const kat = document.getElementById('select-kategori').value;
+    const levelSelect = document.getElementById('select-level');
+    const deskripsi = document.getElementById('tugas-deskripsi');
 
-            levelSelect.innerHTML = '';
-            const options = kat === 'pointing' ?
-            ['rolling', 'soft-lob', 'full-lob'] :
-            ['shooting-1', 'shooting-2', 'shooting-3'];
+    levelSelect.innerHTML = '';
+    const options = kat === 'pointing' ?
+    ['rolling', 'soft-lob', 'full-lob'] :
+    ['shooting-1', 'shooting-2', 'shooting-3'];
 
-            options.forEach(opt => {
-                const el = document.createElement('option');
-                el.value = opt;
-                el.textContent = opt.toUpperCase();
-                levelSelect.appendChild(el);
-            });
+    options.forEach(opt => {
+        const el = document.createElement('option');
+        el.value = opt;
+        el.textContent = opt.toUpperCase();
+        levelSelect.appendChild(el);
+    });
 
-            deskripsi.textContent = programTugas[kat][levelSelect.value];
-        }
+    deskripsi.textContent = programTugas[kat][levelSelect.value];
+}
 
         // Simpan Data ke Riwayat
-        function simpanLatihan() {
-            const kat = document.getElementById('select-kategori').value;
-            const level = document.getElementById('select-level').value;
-            const dots = document.querySelectorAll('.dot-check');
+function simpanLatihan() {
+    const kat = document.getElementById('select-kategori').value;
+    const level = document.getElementById('select-level').value;
+    const dots = document.querySelectorAll('.dot-check');
 
-            let berhasil = 0;
-            dots.forEach(d => { if (d.dataset.status === '1') berhasil++; });
+    let berhasil = 0;
+    dots.forEach(d => { if (d.dataset.status === '1') berhasil++; });
 
-            const dataBaru = {
-                id: Date.now(),
-                tanggal: new Date().toLocaleDateString('id-ID'),
-                kategori: kat,
-                level: level,
-                skor: berhasil
-            };
+    const dataBaru = {
+        id: Date.now(),
+        tanggal: new Date().toLocaleDateString('id-ID'),
+        kategori: kat,
+        level: level,
+        skor: berhasil
+    };
 
             riwayatLatihan.unshift(dataBaru); // Tambah ke awal array
             toast("Latihan Berhasil Disimpan!");
@@ -645,7 +645,7 @@ function resetChecklistLatihan() {
         }
 
         // Tampilkan Daftar Riwayat (Read)
-function renderRiwayat() {
+/*function renderRiwayat() {
     const container = document.getElementById('daftar-riwayat');
     if (!container) return;
 
@@ -716,12 +716,178 @@ function renderRiwayat() {
     }
     
     if (elPencapaian) elPencapaian.textContent = `${dataAtlet.pencapaian_atlet}%`;
+}*/
+        function renderRiwayat() {
+            const container = document.getElementById('daftar-riwayat');
+            if (!container) return;
+
+            riwayatLatihan = ambilRiwayat();
+
+            container.innerHTML = '<h3 class="section-title">Riwayat Terakhir</h3>';
+
+            if (riwayatLatihan.length === 0) {
+                container.innerHTML += `
+        <div class="eval-card" style="text-align:center; color:#333; padding:30px;">
+        Belum ada riwayat latihan.
+                </div>`;
+                return;
+            }
+
+    // VARIABEL AKUMULASI DINAMIS
+            let akumulasiPoinBerhasil = 0;
+            let akumulasiTotalPercobaan = 0;
+
+            riwayatLatihan.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'eval-card';
+                card.style.display = 'flex';
+                card.style.flexDirection = 'column';
+                card.style.gap = '8px';
+
+                let color = "#7f8c8d";
+                if (item.umpan_balik === "Sangat Baik") color = "#1e8449";
+                if (item.umpan_balik === "Baik") color = "#27ae60";
+                if (item.umpan_balik === "Cukup") color = "#e67e22";
+                if (item.umpan_balik === "Kurang") color = "#c0392b";
+
+        // Variabel penampung hasil failsafe per sesi
+                let labelJenis = "";
+                let sesiBerhasil = 0;
+                let sesiGagal = 0;
+                let sesiTotal = 0;
+                let infoDetailHTML = "";
+
+        // LAPIS 1: Cek apakah field 'rincian' tersedia (Data Dinamis Baru)
+                if (typeof item.rincian !== 'undefined' && item.rincian !== null) {
+                    const pObj = item.rincian.pointing || {};
+                    const sObj = item.rincian.shooting || {};
+
+                    const pBerhasil = parseInt(pObj.skor_berhasil ?? pObj.berhasil) || 0;
+                    const pGagal = parseInt(pObj.skor_gagal ?? pObj.gagal) || 0;
+                    const pTotal = parseInt(pObj.total_skor ?? pObj.total) || (pBerhasil + pGagal);
+                    const pPersen = typeof pObj.persentase === 'number' ? pObj.persentase : (pTotal > 0 ? Math.round((pBerhasil / pTotal) * 100) : 0);
+
+                    const sBerhasil = parseInt(sObj.skor_berhasil ?? sObj.berhasil) || 0;
+                    const sGagal = parseInt(sObj.skor_gagal ?? sObj.gagal) || 0;
+                    const sTotal = parseInt(sObj.total_skor ?? sObj.total) || (sBerhasil + sGagal);
+                    const sPersen = typeof sObj.persentase === 'number' ? sObj.persentase : (sTotal > 0 ? Math.round((sBerhasil / sTotal) * 100) : 0);
+
+                    sesiBerhasil = pBerhasil + sBerhasil;
+                    sesiGagal = pGagal + sGagal;
+                    sesiTotal = (pTotal + sTotal) || parseInt(item.total_skor ?? item.total_lemparan) || 100;
+
+                    if (pTotal > 0 && sTotal > 0) labelJenis = "CAMPURAN : ";
+                    else if (pTotal > 0) labelJenis = "POINTING : ";
+                    else if (sTotal > 0) labelJenis = "SHOOTING : ";
+
+                    infoDetailHTML = `
+                <div style="font-size:0.7rem; color:#222; margin-top:2px;">
+                    Total: ${sesiTotal} Pukulan (✅${sesiBerhasil} | ❌${sesiGagal})
+                </div>
+                <div style="font-size:0.7rem; margin-top:4px; display:flex; flex-wrap:wrap; gap:6px;">
+                        ${pTotal > 0 ? `<span style="background:rgba(39, 174, 96, 0.12); color:#27ae60; padding:2px 6px; border-radius:4px; font-weight:bold;">🎯 P: ${pBerhasil}/${pTotal} (${pPersen}%)</span>` : ''}
+                        ${sTotal > 0 ? `<span style="background:rgba(192, 57, 43, 0.12); color:#c0392b; padding:2px 6px; border-radius:4px; font-weight:bold;">🔥 S: ${sBerhasil}/${sTotal} (${sPersen}%)</span>` : ''}
+                </div>
+                    `;
+                }
+        // LAPIS 2: Jika 'rincian' undefined, cek 'jenis_latihan' (Statis Pointing / Shooting)
+                else if (
+                    typeof item.jenis_latihan !== 'undefined' &&
+                    item.jenis_latihan !== null &&
+                    item.jenis_latihan !== ''
+                    ) {
+                    const jenis = item.jenis_latihan.toLowerCase();
+                labelJenis = item.jenis_latihan.toUpperCase() + " : ";
+
+                sesiBerhasil = parseInt(item.skor_berhasil ?? item.skor) || 0;
+                sesiGagal = typeof item.skor_gagal !== 'undefined'
+                ? parseInt(item.skor_gagal)
+                : Math.max(0, (parseInt(item.total_lemparan) || 100) - sesiBerhasil);
+                sesiTotal = parseInt(item.total_skor) || (sesiBerhasil + sesiGagal) || parseInt(item.total_lemparan) || 100;
+
+                const badgeColor = jenis === 'pointing' ? '#27ae60' : (jenis === 'shooting' ? '#c0392b' : '#1e3a5f');
+                const badgeBg = jenis === 'pointing' ? 'rgba(39, 174, 96, 0.12)' : (jenis === 'shooting' ? 'rgba(192, 57, 43, 0.12)' : 'rgba(30, 58, 95, 0.12)');
+                const icon = jenis === 'pointing' ? '🎯' : (jenis === 'shooting' ? '🔥' : '🔵');
+
+                infoDetailHTML = `
+                <div style="font-size:0.7rem; color:#222; margin-top:2px;">
+                    Target: ${sesiTotal} Pukulan
+                </div>
+                <div style="font-size:0.7rem; margin-top:4px;">
+                    <span style="background:${badgeBg}; color:${badgeColor}; padding:2px 6px; border-radius:4px; font-weight:bold;">
+                        ${icon} Berhasil: ${sesiBerhasil} | Gagal: ${sesiGagal}
+                    </span>
+                </div>
+                `;
+            }
+        // LAPIS 3 (ELSE TERAKHIR): Data lama / lemparan random (Warna Biru #1e3a5f)
+            else {
+                labelJenis = "";
+                sesiBerhasil = parseInt(item.skor_berhasil ?? item.skor) || 0;
+                sesiTotal = parseInt(item.total_skor ?? item.total_lemparan) || 100;
+                sesiGagal = typeof item.skor_gagal !== 'undefined'
+                ? parseInt(item.skor_gagal)
+                : Math.max(0, sesiTotal - sesiBerhasil);
+
+                infoDetailHTML = `
+                <div style="font-size:0.7rem; color:#222; margin-top:2px;">
+                    Target: ${sesiTotal} Pukulan
+                </div>
+                <div style="font-size:0.7rem; margin-top:4px;">
+                    <span style="background:rgba(30, 58, 95, 0.12); color:#1e3a5f; padding:2px 6px; border-radius:4px; font-weight:bold;">
+                        🔵 Random/Lama — Berhasil: ${sesiBerhasil} | Gagal: ${sesiGagal}
+                    </span>
+                </div>
+                `;
+            }
+
+            const persentaseSesi = typeof item.persentase !== 'undefined'
+            ? item.persentase
+            : Math.round((sesiBerhasil / (sesiTotal || 1)) * 100);
+
+        // Render isi kartu riwayat
+            card.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div style="flex:1; padding-right:10px;">
+                <div style="font-weight:bold; color:#1e3a5f; font-size:0.95rem;">${labelJenis}${item.nama_model || 'Latihan Mandiri'}</div>
+                <div style="font-size:0.75rem; color:#333">${item.tanggal || '-'} | ${item.waktu || '-'}</div>
+                ${infoDetailHTML}
+            </div>
+            <div style="text-align:right">
+                <div style="font-size:1.1rem; font-weight:bold; color:#2980b9">${persentaseSesi}%</div>
+                <span style="font-size:0.65rem; padding:2px 6px; border-radius:4px; color:white; background:${color}">${item.umpan_balik || '-'}</span>
+            </div>
+        </div>
+        <div style="border-top:1px solid #eee; padding-top:8px; display:flex; justify-content:space-between; align-items:center;">
+            <div class="catatan-scrollable">"${item.catatan_atlet || 'Tidak ada catatan'}"</div>
+            <button onclick="hapusRiwayat('${item.id_riwayat}')" style="border:none; background:none; color:#e74c3c; font-size:0.7rem; cursor:pointer; font-weight:bold;">Hapus</button>
+        </div>
+            `;
+            container.appendChild(card);
+
+        // HITUNG TOTAL SECARA DINAMIS DARI HASIL FAILSAFE
+            akumulasiPoinBerhasil += sesiBerhasil;
+            akumulasiTotalPercobaan += sesiTotal; 
+        });
+
+    // Update Angka Statistik Dashboard
+const elSesi = document.getElementById('total-sesi');
+const elPencapaian = document.getElementById('pencapaian-atlet');
+const elTotalPoin = document.getElementById('total-poin');
+
+if (elSesi) elSesi.textContent = riwayatLatihan.length;
+
+if (elTotalPoin) {
+    elTotalPoin.textContent = `${akumulasiPoinBerhasil}/${akumulasiTotalPercobaan}`;
+}
+
+if (elPencapaian) elPencapaian.textContent = `${dataAtlet.pencapaian_atlet}%`;
 }
 
         // Hapus Riwayat (Delete)
-        function hapusRiwayat(idRiwayat) {
-            if (confirm("Hapus catatan latihan ini?")) {
-                let riwayat = ambilRiwayat();
+function hapusRiwayat(idRiwayat) {
+    if (confirm("Hapus catatan latihan ini?")) {
+        let riwayat = ambilRiwayat();
         // Filter berdasarkan id_riwayat
         riwayat = riwayat.filter(item => item.id_riwayat !== idRiwayat);
         
@@ -743,20 +909,20 @@ function renderRiwayat() {
 
 function renderDaftarLatihan() {
             // Kita cari elemen di dalam #utama karena struktur SPA
-            const container = document.querySelector('#utama #daftar-semua-latihan');
-            if (!container) return;
-            
-            container.innerHTML = ''; 
-            
-            dataModelLatihan.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = 'card-latihan';
-                card.onclick = () => openDetailLatihanKeterampilan(item.id);
-                
-                // Variasi warna border kiri berselang-seling (Biru / Orange)
-                card.style.borderLeftColor = (index % 2 === 0) ? '#1e3a5f' : '#d35400';
+    const container = document.querySelector('#utama #daftar-semua-latihan');
+    if (!container) return;
 
-                card.innerHTML = `
+    container.innerHTML = ''; 
+
+    dataModelLatihan.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'card-latihan';
+        card.onclick = () => openDetailLatihanKeterampilan(item.id);
+
+                // Variasi warna border kiri berselang-seling (Biru / Orange)
+        card.style.borderLeftColor = (index % 2 === 0) ? '#1e3a5f' : '#d35400';
+
+        card.innerHTML = `
                 <div class="card-icon">${item.model.includes('SITUASI') ? '🔥' : '🎯'}</div>
                 <div class="card-info">
                 <h3 style="font-size: 0.95rem; color: #666;">${item.model}</h3>
@@ -765,26 +931,26 @@ function renderDaftarLatihan() {
                 </span>
                 </div>
                 <div class="card-arrow">›</div>
-                `;
-                container.appendChild(card);
-            });
-        }
+        `;
+        container.appendChild(card);
+    });
+}
 
         // Fungsi untuk buka/tutup accordion
-        function toggleAccordion(header) {
-            const item = header.parentElement;
-            const icon = header.querySelector('.icon');
-            item.classList.toggle('active');
-            icon.innerHTML = item.classList.contains('active') ? '▲' : '▼';
-        }
+function toggleAccordion(header) {
+    const item = header.parentElement;
+    const icon = header.querySelector('.icon');
+    item.classList.toggle('active');
+    icon.innerHTML = item.classList.contains('active') ? '▲' : '▼';
+}
 
-        function openDetailLatihanKeterampilan(id) {
-            const data = dataModelLatihan.find(item => item.id === id);
-            if (!data) return;
+function openDetailLatihanKeterampilan(id) {
+    const data = dataModelLatihan.find(item => item.id === id);
+    if (!data) return;
 
-            const templateSource = document.getElementById('detail-view');
-            wrapperUtama.innerHTML = templateSource.innerHTML;
-            document.getElementById('utama').scrollTo(0, 0);
+    const templateSource = document.getElementById('detail-view');
+    wrapperUtama.innerHTML = templateSource.innerHTML;
+    document.getElementById('utama').scrollTo(0, 0);
 
     // --- RENDER GAMBAR ---
     const containerGambar = document.querySelector('#utama #d-container-gambar');
@@ -824,7 +990,7 @@ function renderDaftarLatihan() {
 
     // --- RENDER TEKS ---
     document.querySelector('#utama #d-judul').innerHTML = `
-    <div style="font-size:0.9rem; color:#888;">${data.model}</div>
+    <div style="font-size:0.9rem; color:#333;">${data.model}</div>
     ${data.nama}
     `;
     document.querySelector('#utama #d-tujuan').textContent = data.tujuan_utama;
@@ -845,8 +1011,8 @@ function renderDaftarLatihan() {
         <div class="step-item">
         <span class="step-item-title">Langkah ${index + 1}</span>
         <p>${langkah.deskripsi}</p>
-        ${langkah.coaching_point ? `<div class="info-badge badge-coaching">💡 ${langkah.coaching_point}</div>` : ''}
-        ${langkah.target ? `<div class="info-badge badge-target">🎯 Target: ${langkah.target}</div>` : ''}
+            ${langkah.coaching_point ? `<div class="info-badge badge-coaching">💡 ${langkah.coaching_point}</div>` : ''}
+            ${langkah.target ? `<div class="info-badge badge-target">🎯 Target: ${langkah.target}</div>` : ''}
         </div>`;
     });
     ulLangkah.innerHTML = langkahHtml;
@@ -860,10 +1026,10 @@ function renderDaftarLatihan() {
     // Di dalam fungsi openDetailLatihanKeterampilan(id)
 // Cari bagian tombol "Ayo Lakukan Latihan" dan ubah menjadi:
 
-const btnAksi = document.querySelector('#utama .btn-primary-action');
-if (btnAksi) {
-    btnAksi.onclick = () => bukaFormLatihan(data.id);
-}
+    const btnAksi = document.querySelector('#utama .btn-primary-action');
+    if (btnAksi) {
+        btnAksi.onclick = () => bukaFormLatihan(data.id);
+    }
 }
 
 // Fungsi Placeholder untuk Tahap Selanjutnya
@@ -977,6 +1143,8 @@ function updateUIProfil() {
     if (elFoto) elFoto.src = dataAtlet.foto_atlet;
 }
 
+// ini yang asli
+/*
 function prosesSimpanRiwayat() {
     counterLock = 0;
     lockJenisLatihan();
@@ -1009,6 +1177,86 @@ function prosesSimpanRiwayat() {
         skor_gagal: totalLemparan - skorBerhasil,
         total_lemparan: totalLemparan, // Tersimpan sesuai jumlah set user
         persentase: persentase,
+        catatan_atlet: catatan,
+        umpan_balik: tentukanUmpanBalik(persentase)
+    };
+
+    let riwayat = ambilRiwayat();
+    riwayat.unshift(dataBaru);
+    localStorage.setItem('petanqueRiwayat', JSON.stringify(riwayat));
+
+    updatePencapaianAtlet();
+    toast("Latihan Berhasil Disimpan!");
+    loadContent('evaluasi-refleksi');
+}
+*/
+
+function prosesSimpanRiwayat() {
+    const selectModel = document.getElementById('select-model-latihan');
+    const modelId = selectModel.value;
+    const catatan = document.getElementById('input-catatan-atlet').value;
+
+    if (!modelId) {
+        toast("Silakan pilih model latihan terlebih dahulu!");
+        return;
+    }
+
+    // 1. Hitung rincian Pointing
+    const pBerhasil = statusLemparan.filter(s => s.jenis === 'pointing' && s.status === 1).length;
+    const pGagal = statusLemparan.filter(s => s.jenis === 'pointing' && s.status === 2).length;
+    const pTotal = pBerhasil + pGagal;
+    const persenPointing = pTotal > 0 ? Math.round((pBerhasil / pTotal) * 100) : null;
+
+    // 2. Hitung rincian Shooting
+    const sBerhasil = statusLemparan.filter(s => s.jenis === 'shooting' && s.status === 1).length;
+    const sGagal = statusLemparan.filter(s => s.jenis === 'shooting' && s.status === 2).length;
+    const sTotal = sBerhasil + sGagal;
+    const persenShooting = sTotal > 0 ? Math.round((sBerhasil / sTotal) * 100) : null;
+
+    // 3. Akumulasi skor_berhasil, skor_gagal, dan total_skor aktual
+    const skorBerhasil = pBerhasil + sBerhasil;
+    const skorGagal = pGagal + sGagal;
+    const totalSkor = skorBerhasil + skorGagal; // Total lemparan yang benar-benar dilakukan
+
+    if (totalSkor === 0) {
+        toast("Silakan isi hasil percobaan pada checklist terlebih dahulu!");
+        return;
+    }
+
+    const persentase = Math.round((skorBerhasil / totalSkor) * 100);
+
+    // Penentuan label jenis_latihan
+    let kategoriSesi = "campuran";
+    if (pTotal > 0 && sTotal === 0) kategoriSesi = "pointing";
+    else if (sTotal > 0 && pTotal === 0) kategoriSesi = "shooting";
+
+    const dataBaru = {
+        id_riwayat: "LOG-" + Date.now(),
+        id_atlet: dataAtlet.id_atlet,
+        id_model: parseInt(modelId),
+        nama_model: selectModel.options[selectModel.selectedIndex].text,
+        jenis_latihan: kategoriSesi,
+        tanggal: new Date().toISOString().split('T')[0],
+        waktu: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        skor_berhasil: skorBerhasil,
+        skor_gagal: skorGagal,
+        total_skor: totalSkor,
+        total_lemparan: totalSkor, // Disamakan agar kompatibel dengan pembacaan kode lama
+        persentase: persentase,
+        rincian: {
+            pointing: {
+                skor_berhasil: pBerhasil,
+                skor_gagal: pGagal,
+                total_skor: pTotal,
+                persentase: persenPointing
+            },
+            shooting: {
+                skor_berhasil: sBerhasil,
+                skor_gagal: sGagal,
+                total_skor: sTotal,
+                persentase: persenShooting
+            }
+        },
         catatan_atlet: catatan,
         umpan_balik: tentukanUmpanBalik(persentase)
     };
@@ -1064,6 +1312,8 @@ function generateChecklist() {
 let statusLemparan = []; // Biarkan kosong, akan diisi saat generate
 let counterLock = 0;
 
+// ini yang asli 21102026
+/*
 function generateChecklist() {
     const container = document.getElementById('checklist-container');
     const inputTotal = document.getElementById('input-total-lemparan');
@@ -1112,8 +1362,69 @@ function generateChecklist() {
     }
     updateLiveScore();
 }
+*/
+
+// Ubah di scripts.js
+//let statusLemparan = []; 
+
+function generateChecklist() {
+    const container = document.getElementById('checklist-container');
+    const inputTotal = document.getElementById('input-total-lemparan');
+
+    if (!container || !inputTotal) return;
+    
+    const total = parseInt(inputTotal.value) || 100;
+    container.innerHTML = ''; 
+    
+    // Simpan objek { status, jenis } untuk setiap nomor lemparan
+    statusLemparan = Array.from({ length: total }, () => ({
+        status: 0,   // 0: Belum, 1: Berhasil, 2: Gagal
+        jenis: null  // 'pointing' | 'shooting' | null
+    }));
+
+    for (let i = 0; i < total; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot-check dot-status-0';
+        dot.textContent = i + 1;
+        
+        dot.onclick = function() {
+            const radioLatihan = document.querySelector('#utama input[name="jenis_latihan"]:checked') || document.querySelector('input[name="jenis_latihan"]:checked');
+            
+            if (!radioLatihan || radioLatihan.value === "") {
+                toast("Mohon pilih mode Pointing atau Shooting terlebih dahulu!");
+                return;
+            }
+
+            const jenisAktif = radioLatihan.value; // "pointing" atau "shooting"
+            const kodeHuruf = jenisAktif === "pointing" ? "P" : "S";
+
+            // Logika rotasi: Belum (0) -> Berhasil (1) -> Gagal (2) -> Reset (0)
+            if (statusLemparan[i].status === 0) {
+                statusLemparan[i] = { status: 1, jenis: jenisAktif };
+                this.className = 'dot-check dot-status-1';
+                this.textContent = kodeHuruf;
+            } else if (statusLemparan[i].status === 1) {
+                statusLemparan[i] = { status: 2, jenis: jenisAktif };
+                this.className = 'dot-check dot-status-2';
+                this.textContent = kodeHuruf;
+            } else {
+                // Saat di-reset, kembalikan teks ke angka nomor urut awal
+                statusLemparan[i] = { status: 0, jenis: null };
+                this.className = 'dot-check dot-status-0';
+                this.textContent = i + 1;
+            }
+            
+            updateLiveScore();
+            // CATATAN: lockJenisLatihan() dihapus agar atlet bebas berganti mode
+        };
+        container.appendChild(dot);
+    }
+    updateLiveScore();
+}
 
 function lockJenisLatihan(){
+    // matikan
+    /*
     // Mengambil semua radio button berdasarkan nama grupnya
     const radioButtons = document.querySelectorAll('input[name="jenis_latihan"]');
     
@@ -1129,8 +1440,11 @@ function lockJenisLatihan(){
         });
 
     }
+    */
 }
 
+// ini yang asli
+/*
 function updateLiveScore() {
     const berhasil = statusLemparan.filter(s => s === 1).length;
     const gagal = statusLemparan.filter(s => s === 2).length;
@@ -1139,6 +1453,20 @@ function updateLiveScore() {
     const elGagal = document.getElementById('live-gagal');
     if (elBerhasil) elBerhasil.textContent = berhasil;
     if (elGagal) elGagal.textContent = gagal;
+}
+*/
+
+function updateLiveScore() {
+    const pBerhasil = statusLemparan.filter(s => s.jenis === 'pointing' && s.status === 1).length;
+    const pGagal = statusLemparan.filter(s => s.jenis === 'pointing' && s.status === 2).length;
+    const sBerhasil = statusLemparan.filter(s => s.jenis === 'shooting' && s.status === 1).length;
+    const sGagal = statusLemparan.filter(s => s.jenis === 'shooting' && s.status === 2).length;
+
+    const elBerhasil = document.getElementById('live-berhasil');
+    const elGagal = document.getElementById('live-gagal');
+    
+    if (elBerhasil) elBerhasil.textContent = `${pBerhasil + sBerhasil} (P:${pBerhasil} | S:${sBerhasil})`;
+    if (elGagal) elGagal.textContent = `${pGagal + sGagal} (P:${pGagal} | S:${sGagal})`;
 }
 
 // Fungsi hitung total untuk disimpan ke riwayat
@@ -1217,22 +1545,22 @@ function updateUIProfil() {
         if(tmpUmpan === "Baik") color = "#27ae60";
         if(tmpUmpan === "Cukup") color = "#e67e22";
         if(tmpUmpan === "Kurang") color = "#c0392b";
-    
+
     // Tampilkan pencapaian dengan simbol %
-    if (elPencapaian) {
-        elPencapaian.textContent = `${tmp}%`;
-        reviewPencapaian.style.background = color;
-        reviewPencapaian.textContent = tmpUmpan;
+        if (elPencapaian) {
+            elPencapaian.textContent = `${tmp}%`;
+            reviewPencapaian.style.background = color;
+            reviewPencapaian.textContent = tmpUmpan;
+        }
     }
-}
 
-function ambilRiwayat() {
-    const rawData = localStorage.getItem('petanqueRiwayat');
-    return rawData ? JSON.parse(rawData) : [];
-}
+    function ambilRiwayat() {
+        const rawData = localStorage.getItem('petanqueRiwayat');
+        return rawData ? JSON.parse(rawData) : [];
+    }
 
-function simpanLatihanBaru(dataBaru) {
-    let listRiwayat = ambilRiwayat();
+    function simpanLatihanBaru(dataBaru) {
+        let listRiwayat = ambilRiwayat();
     listRiwayat.unshift(dataBaru); // Gunakan unshift agar data terbaru ada di paling atas
     localStorage.setItem('petanqueRiwayat', JSON.stringify(listRiwayat));
 }
@@ -1315,8 +1643,10 @@ function renderDashboardHome() {
     });
 }
 
+/*
 let myChart = null; // Variabel global untuk menyimpan instance chart
 
+// ini aslinya
 
 function initChartPerforma() {
     const ctx = document.getElementById('performaChart');
@@ -1415,7 +1745,9 @@ function initChartPerforma() {
         }
     });
 }
+*/
 
+/*
 let chartRaksasaInstance = null;
 
 function renderAnalisisMendalam() {
@@ -1517,6 +1849,350 @@ function renderAnalisisMendalam() {
                     title: { 
                         display: true, 
                         text: 'Jumlah Percobaan per Sesi',
+                        color: '#666'
+                    }
+                }
+            }
+        }
+    });
+
+    setTimeout(() => {
+        dynamicArea.parentElement.scrollLeft = dynamicArea.offsetWidth;
+    }, 400);
+}
+*/
+
+// FUNGSI HELPER FAILSAFE UNTUK KEDUA GRAFIK
+function olahDataGrafikFailsafe(dataSesi) {
+    const labels = [];
+    const dataPointing = [];
+    const dataShooting = [];
+    const dataOld = []; // Garis biru untuk lemparan random / data lama
+
+    // Menyimpan metadata (skor_berhasil, skor_gagal, total_skor, tanggal) untuk Tooltip
+    const metaPointing = [];
+    const metaShooting = [];
+    const metaOld = [];
+    const semuaPersentaseValid = [];
+
+    dataSesi.forEach(item => {
+        const tanggal = item.tanggal || "Tanpa Tanggal";
+
+        // LAPIS 1: Cek apakah field 'rincian' tersedia (Data Dinamis Baru)
+        if (typeof item.rincian !== 'undefined' && item.rincian !== null) {
+            const pObj = item.rincian.pointing || {};
+            const sObj = item.rincian.shooting || {};
+
+            // Ambil skor_berhasil & skor_gagal Pointing (mendukung properti skor_berhasil atau berhasil)
+            const pBerhasil = parseInt(pObj.skor_berhasil ?? pObj.berhasil) || 0;
+            const pGagal = parseInt(pObj.skor_gagal ?? pObj.gagal) || 0;
+            const pTotal = parseInt(pObj.total_skor ?? pObj.total) || (pBerhasil + pGagal);
+
+            // Ambil skor_berhasil & skor_gagal Shooting
+            const sBerhasil = parseInt(sObj.skor_berhasil ?? sObj.berhasil) || 0;
+            const sGagal = parseInt(sObj.skor_gagal ?? sObj.gagal) || 0;
+            const sTotal = parseInt(sObj.total_skor ?? sObj.total) || (sBerhasil + sGagal);
+
+            const totalSkorSesi = (pTotal + sTotal) || parseInt(item.total_skor || item.total_lemparan) || 100;
+            labels.push(`${tanggal} (${totalSkorSesi})`);
+
+            // Proses Pointing
+            if (pTotal > 0) {
+                const pPersen = typeof pObj.persentase === 'number' ? pObj.persentase : Math.round((pBerhasil / pTotal) * 100);
+                dataPointing.push(pPersen);
+                metaPointing.push({ tanggal, berhasil: pBerhasil, gagal: pGagal, total: pTotal });
+                semuaPersentaseValid.push(pPersen);
+            } else {
+                dataPointing.push(null);
+                metaPointing.push(null);
+            }
+
+            // Proses Shooting
+            if (sTotal > 0) {
+                const sPersen = typeof sObj.persentase === 'number' ? sObj.persentase : Math.round((sBerhasil / sTotal) * 100);
+                dataShooting.push(sPersen);
+                metaShooting.push({ tanggal, berhasil: sBerhasil, gagal: sGagal, total: sTotal });
+                semuaPersentaseValid.push(sPersen);
+            } else {
+                dataShooting.push(null);
+                metaShooting.push(null);
+            }
+
+            // Data baru tidak masuk ke garis biru
+            dataOld.push(null);
+            metaOld.push(null);
+        }
+
+        // LAPIS 2: Jika 'rincian' undefined, cek 'jenis_latihan' (Pointing / Shooting statis)
+        else if (
+            typeof item.jenis_latihan !== 'undefined' &&
+            item.jenis_latihan !== null &&
+            (item.jenis_latihan.toLowerCase() === 'pointing' || item.jenis_latihan.toLowerCase() === 'shooting')
+            ) {
+            const jenis = item.jenis_latihan.toLowerCase();
+        const berhasil = parseInt(item.skor_berhasil ?? item.skor) || 0;
+        const gagal = typeof item.skor_gagal !== 'undefined'
+        ? parseInt(item.skor_gagal)
+        : ((parseInt(item.total_lemparan) || 100) - berhasil);
+        const totalSkor = parseInt(item.total_skor) || (berhasil + gagal) || parseInt(item.total_lemparan) || 100;
+        const persen = typeof item.persentase !== 'undefined'
+        ? parseFloat(item.persentase)
+        : Math.round((berhasil / totalSkor) * 100);
+
+        labels.push(`${tanggal} (${totalSkor})`);
+        semuaPersentaseValid.push(persen);
+
+        if (jenis === 'pointing') {
+            dataPointing.push(persen);
+            metaPointing.push({ tanggal, berhasil, gagal, total: totalSkor });
+            dataShooting.push(null);
+            metaShooting.push(null);
+        } else {
+            dataPointing.push(null);
+            metaPointing.push(null);
+            dataShooting.push(persen);
+            metaShooting.push({ tanggal, berhasil, gagal, total: totalSkor });
+        }
+
+        dataOld.push(null);
+        metaOld.push(null);
+    }
+
+        // LAPIS 3 (ELSE TERAKHIR): Garis Biru untuk data lemparan random / data versi lama
+    else {
+        const berhasil = parseInt(item.skor_berhasil ?? item.skor) || 0;
+        const totalSkor = parseInt(item.total_skor ?? item.total_lemparan) || 100;
+        const gagal = typeof item.skor_gagal !== 'undefined'
+        ? parseInt(item.skor_gagal)
+        : Math.max(0, totalSkor - berhasil);
+        const persen = typeof item.persentase !== 'undefined'
+        ? parseFloat(item.persentase)
+        : Math.round((berhasil / totalSkor) * 100);
+
+        labels.push(`${tanggal} (${totalSkor})`);
+        semuaPersentaseValid.push(persen);
+
+        dataPointing.push(null);
+        metaPointing.push(null);
+        dataShooting.push(null);
+        metaShooting.push(null);
+
+        dataOld.push(persen);
+        metaOld.push({ tanggal, berhasil, gagal, total: totalSkor });
+    }
+});
+
+return {
+    labels,
+    dataPointing,
+    dataShooting,
+    dataOld,
+    metaAll: [metaPointing, metaShooting, metaOld],
+    semuaPersentaseValid
+};
+}
+
+// =========================================================================
+// GRAFIK 1: #performaChart (7 Sesi Terakhir di Halaman Home)
+// =========================================================================
+let myChart = null;
+
+function initChartPerforma() {
+    const ctx = document.getElementById('performaChart');
+    if (!ctx) return;
+
+    const riwayat = ambilRiwayat();
+    const dataTerakhir = riwayat.slice(0, 7).reverse();
+
+    const hasil = olahDataGrafikFailsafe(dataTerakhir);
+
+    if (myChart) myChart.destroy();
+
+    myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: hasil.labels,
+            datasets: [
+                {
+                    label: 'Pointing',
+                    data: hasil.dataPointing,
+                    borderColor: '#27ae60',
+                    backgroundColor: 'rgba(39, 174, 96, 0.1)',
+                    borderWidth: 3,
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    spanGaps: true
+                },
+                {
+                    label: 'Shooting',
+                    data: hasil.dataShooting,
+                    borderColor: '#c0392b',
+                    backgroundColor: 'rgba(192, 57, 43, 0.1)',
+                    borderWidth: 3,
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    spanGaps: true
+                },
+                {
+                    label: 'Random / Lama',
+                    data: hasil.dataOld,
+                    borderColor: '#1e3a5f', // Warna Biru
+                    backgroundColor: 'rgba(30, 58, 95, 0.1)',
+                    borderWidth: 3,
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    spanGaps: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: { display: true, text: 'Akurasi (%)', font: { size: 10 } }
+                },
+                x: {
+                    ticks: { font: { size: 9 } },
+                    title: { display: true, text: 'Tanggal (Total Lemparan)', font: { size: 10 } }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: { boxWidth: 10, font: { size: 10 } }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (items) => {
+                            if (!items.length) return '';
+                            const dsIndex = items[0].datasetIndex;
+                            const dIndex = items[0].dataIndex;
+                            const meta = hasil.metaAll[dsIndex]?.[dIndex];
+                            return meta ? `Tanggal: ${meta.tanggal}` : items[0].label;
+                        },
+                        label: (item) => {
+                            if (item.parsed.y === null || typeof item.parsed.y === 'undefined') return null;
+                            const meta = hasil.metaAll[item.datasetIndex]?.[item.dataIndex];
+                            if (meta) {
+                                return ` ${item.dataset.label}: ${item.parsed.y}% (✅${meta.berhasil} | ❌${meta.gagal} dari ${meta.total})`;
+                            }
+                            return ` ${item.dataset.label}: ${item.parsed.y}%`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+// =========================================================================
+// GRAFIK 2: #canvasRaksasa (Analisis Mendalam Seluruh Riwayat)
+// =========================================================================
+let chartRaksasaInstance = null;
+
+function renderAnalisisMendalam() {
+    const ctx = document.getElementById('canvasRaksasa');
+    const dynamicArea = document.getElementById('chart-area-raksasa');
+    if (!ctx || !dynamicArea) return;
+
+    const riwayat = ambilRiwayat();
+    if (riwayat.length === 0) return;
+
+    const dataFull = [...riwayat].reverse();
+    const hasil = olahDataGrafikFailsafe(dataFull);
+
+    // Failsafe nilai tertinggi & terendah agar tidak menghasilkan NaN atau -Infinity
+    const daftarSkor = hasil.semuaPersentaseValid.length > 0 ? hasil.semuaPersentaseValid : [0];
+    const elTertinggi = document.getElementById('val-tertinggi');
+    const elTerendah = document.getElementById('val-terendah');
+    if (elTertinggi) elTertinggi.textContent = Math.max(...daftarSkor) + "%";
+    if (elTerendah) elTerendah.textContent = Math.min(...daftarSkor) + "%";
+
+    const computedWidth = dataFull.length * 75;
+    dynamicArea.style.width = Math.max(computedWidth, dynamicArea.parentElement.offsetWidth) + "px";
+
+    if (chartRaksasaInstance) chartRaksasaInstance.destroy();
+
+    chartRaksasaInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: hasil.labels,
+            datasets: [
+                {
+                    label: 'Pointing',
+                    data: hasil.dataPointing,
+                    borderColor: '#27ae60',
+                    backgroundColor: 'rgba(39, 174, 96, 0.1)',
+                    borderWidth: 4,
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    spanGaps: true
+                },
+                {
+                    label: 'Shooting',
+                    data: hasil.dataShooting,
+                    borderColor: '#c0392b',
+                    backgroundColor: 'rgba(192, 57, 43, 0.1)',
+                    borderWidth: 4,
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    spanGaps: true
+                },
+                {
+                    label: 'Random / Lama',
+                    data: hasil.dataOld,
+                    borderColor: '#1e3a5f', // Warna Biru
+                    backgroundColor: 'rgba(30, 58, 95, 0.1)',
+                    borderWidth: 4,
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    spanGaps: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: { boxWidth: 12, font: { size: 11 } }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (items) => {
+                            if (!items.length) return '';
+                            const dsIndex = items[0].datasetIndex;
+                            const dIndex = items[0].dataIndex;
+                            const meta = hasil.metaAll[dsIndex]?.[dIndex];
+                            return meta ? `Tanggal: ${meta.tanggal} (Total: ${meta.total} Lemparan)` : `Sesi: ${items[0].label}`;
+                        },
+                        label: (item) => {
+                            if (item.parsed.y === null || typeof item.parsed.y === 'undefined') return null;
+                            const meta = hasil.metaAll[item.datasetIndex]?.[item.dataIndex];
+                            if (meta) {
+                                return ` ${item.dataset.label}: ${item.parsed.y}% (Berhasil: ${meta.berhasil} | Gagal: ${meta.gagal})`;
+                            }
+                            return ` ${item.dataset.label}: ${item.parsed.y}%`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: { beginAtZero: true, max: 100 },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Tanggal & Jumlah Percobaan per Sesi',
                         color: '#666'
                     }
                 }
