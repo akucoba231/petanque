@@ -18,7 +18,7 @@ body {
     width: 100%;
     max-width: var(--max-width);
     /* Ukuran Mobile agar lebih mirip desain */
-    background: url('assets/bg.png') no-repeat center center fixed;
+    background: url('assets/bg_.webp') no-repeat center center fixed;
     background-size: cover;
     min-height: 100vh;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
